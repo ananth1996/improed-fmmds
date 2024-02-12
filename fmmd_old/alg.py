@@ -8,7 +8,7 @@ import networkx as nx
 import numpy as np
 from gurobipy import GRB
 
-import utils
+import fmmd_old.utils as utils
 
 ElemList = Union[List[utils.Elem], List[utils.ElemSparse]]
 TIME_LIMIT_ILP = 300
