@@ -43,7 +43,7 @@ def update_dists(double[::1] dists,double[:,::1] elements, double[::1] item):
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def parallel_pdist(double[:,::1] features):
+def pdist(double[:,::1] features):
     cdef Py_ssize_t N = features.shape[0]
     cdef Py_ssize_t M = N*(N-1)//2
     results = np.zeros(M)
@@ -61,7 +61,7 @@ def parallel_pdist(double[:,::1] features):
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def parallel_cdist(double[:,::1] x, double[:,::1] y ):
+def cdist(double[:,::1] x, double[:,::1] y ):
     cdef Py_ssize_t N = x.shape[0]
     cdef Py_ssize_t M = y.shape[0]
     results = np.zeros(N*M)
@@ -78,7 +78,7 @@ def parallel_cdist(double[:,::1] x, double[:,::1] y ):
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def parallel_edges(double[:,::1] features,double diversity_threshold):
+def edges(double[:,::1] features,double diversity_threshold):
     """
     Returns the edges between items which have distance below a threshold.
     """

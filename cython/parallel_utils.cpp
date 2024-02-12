@@ -14,12 +14,12 @@
             "-std=c++11"
         ],
         "language": "c++",
-        "name": "utils_c",
+        "name": "fmmd.parallel_utils",
         "sources": [
-            "utils_c.pyx"
+            "cython/parallel_utils.pyx"
         ]
     },
-    "module_name": "utils_c"
+    "module_name": "fmmd.parallel_utils"
 }
 END: Cython Metadata */
 
@@ -1108,8 +1108,8 @@ static CYTHON_INLINE float __PYX_NAN() {
     #define __PYX_EXTERN_C extern "C++"
 #endif
 
-#define __PYX_HAVE__utils_c
-#define __PYX_HAVE_API__utils_c
+#define __PYX_HAVE__fmmd__parallel_utils
+#define __PYX_HAVE_API__fmmd__parallel_utils
 /* Early includes */
 #include <math.h>
 #include <omp.h>
@@ -1383,7 +1383,7 @@ static const char *__pyx_filename;
 /* #### Code section: filename_table ### */
 
 static const char *__pyx_f[] = {
-  "utils_c.pyx",
+  "cython/parallel_utils.pyx",
   "<stringsource>",
 };
 /* #### Code section: utility_code_proto_before_types ### */
@@ -2617,7 +2617,7 @@ static PyObject *__pyx_memoryviewslice__get_base(struct __pyx_memoryviewslice_ob
 
 /* Module declarations from "libcpp.vector" */
 
-/* Module declarations from "utils_c" */
+/* Module declarations from "fmmd.parallel_utils" */
 static PyObject *__pyx_collections_abc_Sequence = 0;
 static PyObject *generic = 0;
 static PyObject *strided = 0;
@@ -2626,7 +2626,7 @@ static PyObject *contiguous = 0;
 static PyObject *indirect_contiguous = 0;
 static int __pyx_memoryview_thread_locks_used;
 static PyThread_type_lock __pyx_memoryview_thread_locks[8];
-static double __pyx_f_7utils_c_l2_dist(__Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
+static double __pyx_f_4fmmd_14parallel_utils_l2_dist(__Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
 static PyObject *__pyx_convert_vector_to_py_Py_ssize_t(std::vector<Py_ssize_t>  const &); /*proto*/
 static PyObject *__pyx_convert_vector_to_py_double(std::vector<double>  const &); /*proto*/
 static int __pyx_array_allocate_buffer(struct __pyx_array_obj *); /*proto*/
@@ -2666,11 +2666,11 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *, 
 /* #### Code section: typeinfo ### */
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
 /* #### Code section: before_global_var ### */
-#define __Pyx_MODULE_NAME "utils_c"
-extern int __pyx_module_is_main_utils_c;
-int __pyx_module_is_main_utils_c = 0;
+#define __Pyx_MODULE_NAME "fmmd.parallel_utils"
+extern int __pyx_module_is_main_fmmd__parallel_utils;
+int __pyx_module_is_main_fmmd__parallel_utils = 0;
 
-/* Implementation of "utils_c" */
+/* Implementation of "fmmd.parallel_utils" */
 /* #### Code section: global_var ### */
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_MemoryError;
@@ -2731,13 +2731,16 @@ static const char __pyx_k_step[] = "step";
 static const char __pyx_k_stop[] = "stop";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_ASCII[] = "ASCII";
+static const char __pyx_k_cdist[] = "cdist";
 static const char __pyx_k_class[] = "__class__";
 static const char __pyx_k_count[] = "count";
 static const char __pyx_k_dists[] = "dists";
+static const char __pyx_k_edges[] = "edges";
 static const char __pyx_k_error[] = "error";
 static const char __pyx_k_flags[] = "flags";
 static const char __pyx_k_index[] = "index";
 static const char __pyx_k_numpy[] = "numpy";
+static const char __pyx_k_pdist[] = "pdist";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_shape[] = "shape";
 static const char __pyx_k_start[] = "start";
@@ -2758,7 +2761,6 @@ static const char __pyx_k_fortran[] = "fortran";
 static const char __pyx_k_l2_dist[] = "l2_dist";
 static const char __pyx_k_memview[] = "memview";
 static const char __pyx_k_results[] = "results";
-static const char __pyx_k_utils_c[] = "utils_c";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
 static const char __pyx_k_Sequence[] = "Sequence";
 static const char __pyx_k_elements[] = "elements";
@@ -2781,7 +2783,6 @@ static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_PickleError[] = "PickleError";
 static const char __pyx_k_collections[] = "collections";
 static const char __pyx_k_num_threads[] = "num_threads";
-static const char __pyx_k_utils_c_pyx[] = "utils_c.pyx";
 static const char __pyx_k_initializing[] = "_initializing";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
@@ -2792,9 +2793,6 @@ static const char __pyx_k_version_info[] = "version_info";
 static const char __pyx_k_class_getitem[] = "__class_getitem__";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_AssertionError[] = "AssertionError";
-static const char __pyx_k_parallel_cdist[] = "parallel_cdist";
-static const char __pyx_k_parallel_edges[] = "parallel_edges";
-static const char __pyx_k_parallel_pdist[] = "parallel_pdist";
 static const char __pyx_k_View_MemoryView[] = "View.MemoryView";
 static const char __pyx_k_allocate_buffer[] = "allocate_buffer";
 static const char __pyx_k_collections_abc[] = "collections.abc";
@@ -2806,6 +2804,7 @@ static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_strided_and_direct[] = "<strided and direct>";
 static const char __pyx_k_diversity_threshold[] = "diversity_threshold";
+static const char __pyx_k_fmmd_parallel_utils[] = "fmmd.parallel_utils";
 static const char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static const char __pyx_k_Invalid_shape_in_axis[] = "Invalid shape in axis ";
 static const char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
@@ -2814,6 +2813,7 @@ static const char __pyx_k_MemoryView_of_r_object[] = "<MemoryView of %r object>"
 static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x>";
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
 static const char __pyx_k_Dimension_d_is_not_direct[] = "Dimension %d is not direct";
+static const char __pyx_k_cython_parallel_utils_pyx[] = "cython/parallel_utils.pyx";
 static const char __pyx_k_Index_out_of_bounds_axis_d[] = "Index out of bounds (axis %d)";
 static const char __pyx_k_Step_may_not_be_zero_axis_d[] = "Step may not be zero (axis %d)";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
@@ -2876,11 +2876,11 @@ static void __pyx_memoryviewslice___pyx_pf_15View_dot_MemoryView_16_memoryviewsl
 static PyObject *__pyx_pf___pyx_memoryviewslice___reduce_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf___pyx_memoryviewslice_2__setstate_cython__(CYTHON_UNUSED struct __pyx_memoryviewslice_obj *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_15View_dot_MemoryView___pyx_unpickle_Enum(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_pf_7utils_c_l2_dist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y); /* proto */
-static PyObject *__pyx_pf_7utils_c_2update_dists(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_dists, __Pyx_memviewslice __pyx_v_elements, __Pyx_memviewslice __pyx_v_item); /* proto */
-static PyObject *__pyx_pf_7utils_c_4parallel_pdist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_features); /* proto */
-static PyObject *__pyx_pf_7utils_c_6parallel_cdist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y); /* proto */
-static PyObject *__pyx_pf_7utils_c_8parallel_edges(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_features, double __pyx_v_diversity_threshold); /* proto */
+static PyObject *__pyx_pf_4fmmd_14parallel_utils_l2_dist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y); /* proto */
+static PyObject *__pyx_pf_4fmmd_14parallel_utils_2update_dists(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_dists, __Pyx_memviewslice __pyx_v_elements, __Pyx_memviewslice __pyx_v_item); /* proto */
+static PyObject *__pyx_pf_4fmmd_14parallel_utils_4pdist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_features); /* proto */
+static PyObject *__pyx_pf_4fmmd_14parallel_utils_6cdist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y); /* proto */
+static PyObject *__pyx_pf_4fmmd_14parallel_utils_8edges(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_features, double __pyx_v_diversity_threshold); /* proto */
 static PyObject *__pyx_tp_new_array(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_Enum(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_memoryview(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -2979,6 +2979,7 @@ typedef struct {
   PyObject *__pyx_n_s_base;
   PyObject *__pyx_n_s_c;
   PyObject *__pyx_n_u_c;
+  PyObject *__pyx_n_s_cdist;
   PyObject *__pyx_n_s_class;
   PyObject *__pyx_n_s_class_getitem;
   PyObject *__pyx_n_s_cline_in_traceback;
@@ -2987,6 +2988,7 @@ typedef struct {
   PyObject *__pyx_kp_s_contiguous_and_direct;
   PyObject *__pyx_kp_s_contiguous_and_indirect;
   PyObject *__pyx_n_s_count;
+  PyObject *__pyx_kp_s_cython_parallel_utils_pyx;
   PyObject *__pyx_n_s_dict;
   PyObject *__pyx_kp_u_disable;
   PyObject *__pyx_n_s_dist;
@@ -2994,6 +2996,7 @@ typedef struct {
   PyObject *__pyx_n_s_dists;
   PyObject *__pyx_n_s_diversity_threshold;
   PyObject *__pyx_n_s_dtype_is_object;
+  PyObject *__pyx_n_s_edges;
   PyObject *__pyx_n_s_elements;
   PyObject *__pyx_kp_u_enable;
   PyObject *__pyx_n_s_encode;
@@ -3001,6 +3004,7 @@ typedef struct {
   PyObject *__pyx_n_s_error;
   PyObject *__pyx_n_s_features;
   PyObject *__pyx_n_s_flags;
+  PyObject *__pyx_n_s_fmmd_parallel_utils;
   PyObject *__pyx_n_s_format;
   PyObject *__pyx_n_s_fortran;
   PyObject *__pyx_n_u_fortran;
@@ -3035,9 +3039,7 @@ typedef struct {
   PyObject *__pyx_n_s_numpy;
   PyObject *__pyx_n_s_obj;
   PyObject *__pyx_n_s_pack;
-  PyObject *__pyx_n_s_parallel_cdist;
-  PyObject *__pyx_n_s_parallel_edges;
-  PyObject *__pyx_n_s_parallel_pdist;
+  PyObject *__pyx_n_s_pdist;
   PyObject *__pyx_n_s_pickle;
   PyObject *__pyx_n_s_pyx_PickleError;
   PyObject *__pyx_n_s_pyx_checksum;
@@ -3078,8 +3080,6 @@ typedef struct {
   PyObject *__pyx_n_s_update;
   PyObject *__pyx_n_s_update_dists;
   PyObject *__pyx_n_s_us;
-  PyObject *__pyx_n_s_utils_c;
-  PyObject *__pyx_kp_s_utils_c_pyx;
   PyObject *__pyx_n_s_v;
   PyObject *__pyx_n_s_v_2;
   PyObject *__pyx_n_s_version_info;
@@ -3213,6 +3213,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_base);
   Py_CLEAR(clear_module_state->__pyx_n_s_c);
   Py_CLEAR(clear_module_state->__pyx_n_u_c);
+  Py_CLEAR(clear_module_state->__pyx_n_s_cdist);
   Py_CLEAR(clear_module_state->__pyx_n_s_class);
   Py_CLEAR(clear_module_state->__pyx_n_s_class_getitem);
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
@@ -3221,6 +3222,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_contiguous_and_direct);
   Py_CLEAR(clear_module_state->__pyx_kp_s_contiguous_and_indirect);
   Py_CLEAR(clear_module_state->__pyx_n_s_count);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_cython_parallel_utils_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_dict);
   Py_CLEAR(clear_module_state->__pyx_kp_u_disable);
   Py_CLEAR(clear_module_state->__pyx_n_s_dist);
@@ -3228,6 +3230,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_dists);
   Py_CLEAR(clear_module_state->__pyx_n_s_diversity_threshold);
   Py_CLEAR(clear_module_state->__pyx_n_s_dtype_is_object);
+  Py_CLEAR(clear_module_state->__pyx_n_s_edges);
   Py_CLEAR(clear_module_state->__pyx_n_s_elements);
   Py_CLEAR(clear_module_state->__pyx_kp_u_enable);
   Py_CLEAR(clear_module_state->__pyx_n_s_encode);
@@ -3235,6 +3238,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_error);
   Py_CLEAR(clear_module_state->__pyx_n_s_features);
   Py_CLEAR(clear_module_state->__pyx_n_s_flags);
+  Py_CLEAR(clear_module_state->__pyx_n_s_fmmd_parallel_utils);
   Py_CLEAR(clear_module_state->__pyx_n_s_format);
   Py_CLEAR(clear_module_state->__pyx_n_s_fortran);
   Py_CLEAR(clear_module_state->__pyx_n_u_fortran);
@@ -3269,9 +3273,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_numpy);
   Py_CLEAR(clear_module_state->__pyx_n_s_obj);
   Py_CLEAR(clear_module_state->__pyx_n_s_pack);
-  Py_CLEAR(clear_module_state->__pyx_n_s_parallel_cdist);
-  Py_CLEAR(clear_module_state->__pyx_n_s_parallel_edges);
-  Py_CLEAR(clear_module_state->__pyx_n_s_parallel_pdist);
+  Py_CLEAR(clear_module_state->__pyx_n_s_pdist);
   Py_CLEAR(clear_module_state->__pyx_n_s_pickle);
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_PickleError);
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_checksum);
@@ -3312,8 +3314,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_update);
   Py_CLEAR(clear_module_state->__pyx_n_s_update_dists);
   Py_CLEAR(clear_module_state->__pyx_n_s_us);
-  Py_CLEAR(clear_module_state->__pyx_n_s_utils_c);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_utils_c_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_v);
   Py_CLEAR(clear_module_state->__pyx_n_s_v_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_version_info);
@@ -3425,6 +3425,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_base);
   Py_VISIT(traverse_module_state->__pyx_n_s_c);
   Py_VISIT(traverse_module_state->__pyx_n_u_c);
+  Py_VISIT(traverse_module_state->__pyx_n_s_cdist);
   Py_VISIT(traverse_module_state->__pyx_n_s_class);
   Py_VISIT(traverse_module_state->__pyx_n_s_class_getitem);
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
@@ -3433,6 +3434,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_contiguous_and_direct);
   Py_VISIT(traverse_module_state->__pyx_kp_s_contiguous_and_indirect);
   Py_VISIT(traverse_module_state->__pyx_n_s_count);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_cython_parallel_utils_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_dict);
   Py_VISIT(traverse_module_state->__pyx_kp_u_disable);
   Py_VISIT(traverse_module_state->__pyx_n_s_dist);
@@ -3440,6 +3442,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_dists);
   Py_VISIT(traverse_module_state->__pyx_n_s_diversity_threshold);
   Py_VISIT(traverse_module_state->__pyx_n_s_dtype_is_object);
+  Py_VISIT(traverse_module_state->__pyx_n_s_edges);
   Py_VISIT(traverse_module_state->__pyx_n_s_elements);
   Py_VISIT(traverse_module_state->__pyx_kp_u_enable);
   Py_VISIT(traverse_module_state->__pyx_n_s_encode);
@@ -3447,6 +3450,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_error);
   Py_VISIT(traverse_module_state->__pyx_n_s_features);
   Py_VISIT(traverse_module_state->__pyx_n_s_flags);
+  Py_VISIT(traverse_module_state->__pyx_n_s_fmmd_parallel_utils);
   Py_VISIT(traverse_module_state->__pyx_n_s_format);
   Py_VISIT(traverse_module_state->__pyx_n_s_fortran);
   Py_VISIT(traverse_module_state->__pyx_n_u_fortran);
@@ -3481,9 +3485,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_numpy);
   Py_VISIT(traverse_module_state->__pyx_n_s_obj);
   Py_VISIT(traverse_module_state->__pyx_n_s_pack);
-  Py_VISIT(traverse_module_state->__pyx_n_s_parallel_cdist);
-  Py_VISIT(traverse_module_state->__pyx_n_s_parallel_edges);
-  Py_VISIT(traverse_module_state->__pyx_n_s_parallel_pdist);
+  Py_VISIT(traverse_module_state->__pyx_n_s_pdist);
   Py_VISIT(traverse_module_state->__pyx_n_s_pickle);
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_PickleError);
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_checksum);
@@ -3524,8 +3526,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_update);
   Py_VISIT(traverse_module_state->__pyx_n_s_update_dists);
   Py_VISIT(traverse_module_state->__pyx_n_s_us);
-  Py_VISIT(traverse_module_state->__pyx_n_s_utils_c);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_utils_c_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_v);
   Py_VISIT(traverse_module_state->__pyx_n_s_v_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_version_info);
@@ -3659,6 +3659,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_base __pyx_mstate_global->__pyx_n_s_base
 #define __pyx_n_s_c __pyx_mstate_global->__pyx_n_s_c
 #define __pyx_n_u_c __pyx_mstate_global->__pyx_n_u_c
+#define __pyx_n_s_cdist __pyx_mstate_global->__pyx_n_s_cdist
 #define __pyx_n_s_class __pyx_mstate_global->__pyx_n_s_class
 #define __pyx_n_s_class_getitem __pyx_mstate_global->__pyx_n_s_class_getitem
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
@@ -3667,6 +3668,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_contiguous_and_direct __pyx_mstate_global->__pyx_kp_s_contiguous_and_direct
 #define __pyx_kp_s_contiguous_and_indirect __pyx_mstate_global->__pyx_kp_s_contiguous_and_indirect
 #define __pyx_n_s_count __pyx_mstate_global->__pyx_n_s_count
+#define __pyx_kp_s_cython_parallel_utils_pyx __pyx_mstate_global->__pyx_kp_s_cython_parallel_utils_pyx
 #define __pyx_n_s_dict __pyx_mstate_global->__pyx_n_s_dict
 #define __pyx_kp_u_disable __pyx_mstate_global->__pyx_kp_u_disable
 #define __pyx_n_s_dist __pyx_mstate_global->__pyx_n_s_dist
@@ -3674,6 +3676,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_dists __pyx_mstate_global->__pyx_n_s_dists
 #define __pyx_n_s_diversity_threshold __pyx_mstate_global->__pyx_n_s_diversity_threshold
 #define __pyx_n_s_dtype_is_object __pyx_mstate_global->__pyx_n_s_dtype_is_object
+#define __pyx_n_s_edges __pyx_mstate_global->__pyx_n_s_edges
 #define __pyx_n_s_elements __pyx_mstate_global->__pyx_n_s_elements
 #define __pyx_kp_u_enable __pyx_mstate_global->__pyx_kp_u_enable
 #define __pyx_n_s_encode __pyx_mstate_global->__pyx_n_s_encode
@@ -3681,6 +3684,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_error __pyx_mstate_global->__pyx_n_s_error
 #define __pyx_n_s_features __pyx_mstate_global->__pyx_n_s_features
 #define __pyx_n_s_flags __pyx_mstate_global->__pyx_n_s_flags
+#define __pyx_n_s_fmmd_parallel_utils __pyx_mstate_global->__pyx_n_s_fmmd_parallel_utils
 #define __pyx_n_s_format __pyx_mstate_global->__pyx_n_s_format
 #define __pyx_n_s_fortran __pyx_mstate_global->__pyx_n_s_fortran
 #define __pyx_n_u_fortran __pyx_mstate_global->__pyx_n_u_fortran
@@ -3715,9 +3719,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_numpy __pyx_mstate_global->__pyx_n_s_numpy
 #define __pyx_n_s_obj __pyx_mstate_global->__pyx_n_s_obj
 #define __pyx_n_s_pack __pyx_mstate_global->__pyx_n_s_pack
-#define __pyx_n_s_parallel_cdist __pyx_mstate_global->__pyx_n_s_parallel_cdist
-#define __pyx_n_s_parallel_edges __pyx_mstate_global->__pyx_n_s_parallel_edges
-#define __pyx_n_s_parallel_pdist __pyx_mstate_global->__pyx_n_s_parallel_pdist
+#define __pyx_n_s_pdist __pyx_mstate_global->__pyx_n_s_pdist
 #define __pyx_n_s_pickle __pyx_mstate_global->__pyx_n_s_pickle
 #define __pyx_n_s_pyx_PickleError __pyx_mstate_global->__pyx_n_s_pyx_PickleError
 #define __pyx_n_s_pyx_checksum __pyx_mstate_global->__pyx_n_s_pyx_checksum
@@ -3758,8 +3760,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_update __pyx_mstate_global->__pyx_n_s_update
 #define __pyx_n_s_update_dists __pyx_mstate_global->__pyx_n_s_update_dists
 #define __pyx_n_s_us __pyx_mstate_global->__pyx_n_s_us
-#define __pyx_n_s_utils_c __pyx_mstate_global->__pyx_n_s_utils_c
-#define __pyx_kp_s_utils_c_pyx __pyx_mstate_global->__pyx_kp_s_utils_c_pyx
 #define __pyx_n_s_v __pyx_mstate_global->__pyx_n_s_v
 #define __pyx_n_s_v_2 __pyx_mstate_global->__pyx_n_s_v_2
 #define __pyx_n_s_version_info __pyx_mstate_global->__pyx_n_s_version_info
@@ -17396,7 +17396,7 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *__
   return __pyx_r;
 }
 
-/* "utils_c.pyx":14
+/* "cython/parallel_utils.pyx":14
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cdef double dist_parallel(double[::1] x, double[::1] y):             # <<<<<<<<<<<<<<
@@ -17404,7 +17404,7 @@ static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *__
  *     cdef Py_ssize_t i
  */
 
-static double __pyx_f_7utils_c_dist_parallel(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y) {
+static double __pyx_f_4fmmd_14parallel_utils_dist_parallel(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y) {
   double __pyx_v_total;
   Py_ssize_t __pyx_v_i;
   double __pyx_r;
@@ -17419,7 +17419,7 @@ static double __pyx_f_7utils_c_dist_parallel(__Pyx_memviewslice __pyx_v_x, __Pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("dist_parallel", 0);
 
-  /* "utils_c.pyx":15
+  /* "cython/parallel_utils.pyx":15
  * @cython.wraparound(False)
  * cdef double dist_parallel(double[::1] x, double[::1] y):
  *     cdef double total = 0             # <<<<<<<<<<<<<<
@@ -17428,7 +17428,7 @@ static double __pyx_f_7utils_c_dist_parallel(__Pyx_memviewslice __pyx_v_x, __Pyx
  */
   __pyx_v_total = 0.0;
 
-  /* "utils_c.pyx":17
+  /* "cython/parallel_utils.pyx":17
  *     cdef double total = 0
  *     cdef Py_ssize_t i
  *     for i in prange(x.shape[0], nogil=True):             # <<<<<<<<<<<<<<
@@ -17466,7 +17466,7 @@ static double __pyx_f_7utils_c_dist_parallel(__Pyx_memviewslice __pyx_v_x, __Pyx
                         {
                             __pyx_v_i = (Py_ssize_t)(0 + 1 * __pyx_t_2);
 
-                            /* "utils_c.pyx":18
+                            /* "cython/parallel_utils.pyx":18
  *     cdef Py_ssize_t i
  *     for i in prange(x.shape[0], nogil=True):
  *         total += x[i]*y[i]             # <<<<<<<<<<<<<<
@@ -17489,7 +17489,7 @@ static double __pyx_f_7utils_c_dist_parallel(__Pyx_memviewslice __pyx_v_x, __Pyx
         #endif
       }
 
-      /* "utils_c.pyx":17
+      /* "cython/parallel_utils.pyx":17
  *     cdef double total = 0
  *     cdef Py_ssize_t i
  *     for i in prange(x.shape[0], nogil=True):             # <<<<<<<<<<<<<<
@@ -17515,7 +17515,7 @@ static double __pyx_f_7utils_c_dist_parallel(__Pyx_memviewslice __pyx_v_x, __Pyx
       }
   }
 
-  /* "utils_c.pyx":19
+  /* "cython/parallel_utils.pyx":19
  *     for i in prange(x.shape[0], nogil=True):
  *         total += x[i]*y[i]
  *     total = sqrt(total)             # <<<<<<<<<<<<<<
@@ -17524,7 +17524,7 @@ static double __pyx_f_7utils_c_dist_parallel(__Pyx_memviewslice __pyx_v_x, __Pyx
  */
   __pyx_v_total = sqrt(__pyx_v_total);
 
-  /* "utils_c.pyx":20
+  /* "cython/parallel_utils.pyx":20
  *         total += x[i]*y[i]
  *     total = sqrt(total)
  *     return total             # <<<<<<<<<<<<<<
@@ -17534,7 +17534,7 @@ static double __pyx_f_7utils_c_dist_parallel(__Pyx_memviewslice __pyx_v_x, __Pyx
   __pyx_r = __pyx_v_total;
   goto __pyx_L0;
 
-  /* "utils_c.pyx":14
+  /* "cython/parallel_utils.pyx":14
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cdef double dist_parallel(double[::1] x, double[::1] y):             # <<<<<<<<<<<<<<
@@ -17544,14 +17544,14 @@ static double __pyx_f_7utils_c_dist_parallel(__Pyx_memviewslice __pyx_v_x, __Pyx
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("utils_c.dist_parallel", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmmd.parallel_utils.dist_parallel", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "utils_c.pyx":24
+/* "cython/parallel_utils.pyx":24
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef double l2_dist(double[::1] x, double[::1] y) nogil:             # <<<<<<<<<<<<<<
@@ -17559,14 +17559,14 @@ static double __pyx_f_7utils_c_dist_parallel(__Pyx_memviewslice __pyx_v_x, __Pyx
  *     cdef Py_ssize_t i
  */
 
-static PyObject *__pyx_pw_7utils_c_1l2_dist(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_4fmmd_14parallel_utils_1l2_dist(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static double __pyx_f_7utils_c_l2_dist(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static double __pyx_f_4fmmd_14parallel_utils_l2_dist(__Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y, CYTHON_UNUSED int __pyx_skip_dispatch) {
   double __pyx_v_total;
   Py_ssize_t __pyx_v_i;
   Py_ssize_t __pyx_v_num;
@@ -17578,7 +17578,7 @@ static double __pyx_f_7utils_c_l2_dist(__Pyx_memviewslice __pyx_v_x, __Pyx_memvi
   Py_ssize_t __pyx_t_4;
   Py_ssize_t __pyx_t_5;
 
-  /* "utils_c.pyx":25
+  /* "cython/parallel_utils.pyx":25
  * @cython.wraparound(False)
  * cpdef double l2_dist(double[::1] x, double[::1] y) nogil:
  *     cdef double total = 0             # <<<<<<<<<<<<<<
@@ -17587,7 +17587,7 @@ static double __pyx_f_7utils_c_l2_dist(__Pyx_memviewslice __pyx_v_x, __Pyx_memvi
  */
   __pyx_v_total = 0.0;
 
-  /* "utils_c.pyx":27
+  /* "cython/parallel_utils.pyx":27
  *     cdef double total = 0
  *     cdef Py_ssize_t i
  *     cdef Py_ssize_t num = x.shape[0]             # <<<<<<<<<<<<<<
@@ -17596,7 +17596,7 @@ static double __pyx_f_7utils_c_l2_dist(__Pyx_memviewslice __pyx_v_x, __Pyx_memvi
  */
   __pyx_v_num = (__pyx_v_x.shape[0]);
 
-  /* "utils_c.pyx":29
+  /* "cython/parallel_utils.pyx":29
  *     cdef Py_ssize_t num = x.shape[0]
  *     cdef double tmp
  *     for i in range(num):             # <<<<<<<<<<<<<<
@@ -17608,7 +17608,7 @@ static double __pyx_f_7utils_c_l2_dist(__Pyx_memviewslice __pyx_v_x, __Pyx_memvi
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "utils_c.pyx":30
+    /* "cython/parallel_utils.pyx":30
  *     cdef double tmp
  *     for i in range(num):
  *         tmp = x[i]-y[i]             # <<<<<<<<<<<<<<
@@ -17619,7 +17619,7 @@ static double __pyx_f_7utils_c_l2_dist(__Pyx_memviewslice __pyx_v_x, __Pyx_memvi
     __pyx_t_5 = __pyx_v_i;
     __pyx_v_tmp = ((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_x.data) + __pyx_t_4)) ))) - (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_y.data) + __pyx_t_5)) ))));
 
-    /* "utils_c.pyx":31
+    /* "cython/parallel_utils.pyx":31
  *     for i in range(num):
  *         tmp = x[i]-y[i]
  *         total += tmp*tmp             # <<<<<<<<<<<<<<
@@ -17629,7 +17629,7 @@ static double __pyx_f_7utils_c_l2_dist(__Pyx_memviewslice __pyx_v_x, __Pyx_memvi
     __pyx_v_total = (__pyx_v_total + (__pyx_v_tmp * __pyx_v_tmp));
   }
 
-  /* "utils_c.pyx":32
+  /* "cython/parallel_utils.pyx":32
  *         tmp = x[i]-y[i]
  *         total += tmp*tmp
  *     return sqrt(total)             # <<<<<<<<<<<<<<
@@ -17639,7 +17639,7 @@ static double __pyx_f_7utils_c_l2_dist(__Pyx_memviewslice __pyx_v_x, __Pyx_memvi
   __pyx_r = sqrt(__pyx_v_total);
   goto __pyx_L0;
 
-  /* "utils_c.pyx":24
+  /* "cython/parallel_utils.pyx":24
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef double l2_dist(double[::1] x, double[::1] y) nogil:             # <<<<<<<<<<<<<<
@@ -17653,15 +17653,15 @@ static double __pyx_f_7utils_c_l2_dist(__Pyx_memviewslice __pyx_v_x, __Pyx_memvi
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7utils_c_1l2_dist(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_4fmmd_14parallel_utils_1l2_dist(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7utils_c_1l2_dist = {"l2_dist", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7utils_c_1l2_dist, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7utils_c_1l2_dist(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_4fmmd_14parallel_utils_1l2_dist = {"l2_dist", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4fmmd_14parallel_utils_1l2_dist, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4fmmd_14parallel_utils_1l2_dist(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -17726,11 +17726,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L3_error:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_x, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_y, 1);
-  __Pyx_AddTraceback("utils_c.l2_dist", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmmd.parallel_utils.l2_dist", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7utils_c_l2_dist(__pyx_self, __pyx_v_x, __pyx_v_y);
+  __pyx_r = __pyx_pf_4fmmd_14parallel_utils_l2_dist(__pyx_self, __pyx_v_x, __pyx_v_y);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_x, 1);
@@ -17739,7 +17739,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7utils_c_l2_dist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y) {
+static PyObject *__pyx_pf_4fmmd_14parallel_utils_l2_dist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   double __pyx_t_1;
@@ -17751,7 +17751,7 @@ static PyObject *__pyx_pf_7utils_c_l2_dist(CYTHON_UNUSED PyObject *__pyx_self, _
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(!__pyx_v_x.memview)) { __Pyx_RaiseUnboundLocalError("x"); __PYX_ERR(0, 24, __pyx_L1_error) }
   if (unlikely(!__pyx_v_y.memview)) { __Pyx_RaiseUnboundLocalError("y"); __PYX_ERR(0, 24, __pyx_L1_error) }
-  __pyx_t_1 = __pyx_f_7utils_c_l2_dist(__pyx_v_x, __pyx_v_y, 0); if (unlikely(__pyx_t_1 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_4fmmd_14parallel_utils_l2_dist(__pyx_v_x, __pyx_v_y, 0); if (unlikely(__pyx_t_1 == ((double)-1) && PyErr_Occurred())) __PYX_ERR(0, 24, __pyx_L1_error)
   __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
@@ -17761,7 +17761,7 @@ static PyObject *__pyx_pf_7utils_c_l2_dist(CYTHON_UNUSED PyObject *__pyx_self, _
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("utils_c.l2_dist", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmmd.parallel_utils.l2_dist", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -17769,7 +17769,7 @@ static PyObject *__pyx_pf_7utils_c_l2_dist(CYTHON_UNUSED PyObject *__pyx_self, _
   return __pyx_r;
 }
 
-/* "utils_c.pyx":34
+/* "cython/parallel_utils.pyx":34
  *     return sqrt(total)
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
@@ -17778,15 +17778,15 @@ static PyObject *__pyx_pf_7utils_c_l2_dist(CYTHON_UNUSED PyObject *__pyx_self, _
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7utils_c_3update_dists(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_4fmmd_14parallel_utils_3update_dists(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7utils_c_3update_dists = {"update_dists", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7utils_c_3update_dists, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7utils_c_3update_dists(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_4fmmd_14parallel_utils_3update_dists = {"update_dists", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4fmmd_14parallel_utils_3update_dists, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4fmmd_14parallel_utils_3update_dists(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -17864,11 +17864,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_elements, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_item, 1);
-  __Pyx_AddTraceback("utils_c.update_dists", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmmd.parallel_utils.update_dists", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7utils_c_2update_dists(__pyx_self, __pyx_v_dists, __pyx_v_elements, __pyx_v_item);
+  __pyx_r = __pyx_pf_4fmmd_14parallel_utils_2update_dists(__pyx_self, __pyx_v_dists, __pyx_v_elements, __pyx_v_item);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_dists, 1);
@@ -17878,7 +17878,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7utils_c_2update_dists(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_dists, __Pyx_memviewslice __pyx_v_elements, __Pyx_memviewslice __pyx_v_item) {
+static PyObject *__pyx_pf_4fmmd_14parallel_utils_2update_dists(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_dists, __Pyx_memviewslice __pyx_v_elements, __Pyx_memviewslice __pyx_v_item) {
   CYTHON_UNUSED Py_ssize_t __pyx_v_num;
   Py_ssize_t __pyx_v_i;
   double __pyx_v_tmp;
@@ -17897,7 +17897,7 @@ static PyObject *__pyx_pf_7utils_c_2update_dists(CYTHON_UNUSED PyObject *__pyx_s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("update_dists", 0);
 
-  /* "utils_c.pyx":37
+  /* "cython/parallel_utils.pyx":37
  * @cython.wraparound(False)
  * def update_dists(double[::1] dists,double[:,::1] elements, double[::1] item):
  *     cdef Py_ssize_t num = elements.shape[0]             # <<<<<<<<<<<<<<
@@ -17906,7 +17906,7 @@ static PyObject *__pyx_pf_7utils_c_2update_dists(CYTHON_UNUSED PyObject *__pyx_s
  */
   __pyx_v_num = (__pyx_v_elements.shape[0]);
 
-  /* "utils_c.pyx":40
+  /* "cython/parallel_utils.pyx":40
  *     cdef Py_ssize_t i
  *     cdef double tmp
  *     for i in prange(num, nogil=True):             # <<<<<<<<<<<<<<
@@ -17958,7 +17958,7 @@ static PyObject *__pyx_pf_7utils_c_2update_dists(CYTHON_UNUSED PyObject *__pyx_s
                             /* Initialize private variables to invalid values */
                             __pyx_v_tmp = ((double)__PYX_NAN());
 
-                            /* "utils_c.pyx":41
+                            /* "cython/parallel_utils.pyx":41
  *     cdef double tmp
  *     for i in prange(num, nogil=True):
  *         tmp = l2_dist(elements[i],item)             # <<<<<<<<<<<<<<
@@ -17978,12 +17978,12 @@ __pyx_t_4.shape[0] = __pyx_v_elements.shape[1];
 __pyx_t_4.strides[0] = __pyx_v_elements.strides[1];
     __pyx_t_4.suboffsets[0] = -1;
 
-__pyx_t_5 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_v_item, 0); if (unlikely(__pyx_t_5 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 41, __pyx_L8_error)
+__pyx_t_5 = __pyx_f_4fmmd_14parallel_utils_l2_dist(__pyx_t_4, __pyx_v_item, 0); if (unlikely(__pyx_t_5 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 41, __pyx_L8_error)
                             __PYX_XCLEAR_MEMVIEW(&__pyx_t_4, 0);
                             __pyx_t_4.memview = NULL; __pyx_t_4.data = NULL;
                             __pyx_v_tmp = __pyx_t_5;
 
-                            /* "utils_c.pyx":42
+                            /* "cython/parallel_utils.pyx":42
  *     for i in prange(num, nogil=True):
  *         tmp = l2_dist(elements[i],item)
  *         dists[i] = min(dists[i],tmp)             # <<<<<<<<<<<<<<
@@ -18085,7 +18085,7 @@ __pyx_t_5 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_v_item, 0); if (unlikely(_
         #endif
       }
 
-      /* "utils_c.pyx":40
+      /* "cython/parallel_utils.pyx":40
  *     cdef Py_ssize_t i
  *     cdef double tmp
  *     for i in prange(num, nogil=True):             # <<<<<<<<<<<<<<
@@ -18111,7 +18111,7 @@ __pyx_t_5 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_v_item, 0); if (unlikely(_
       }
   }
 
-  /* "utils_c.pyx":34
+  /* "cython/parallel_utils.pyx":34
  *     return sqrt(total)
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
@@ -18124,7 +18124,7 @@ __pyx_t_5 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_v_item, 0); if (unlikely(_
   goto __pyx_L0;
   __pyx_L1_error:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_4, 1);
-  __Pyx_AddTraceback("utils_c.update_dists", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmmd.parallel_utils.update_dists", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -18132,24 +18132,24 @@ __pyx_t_5 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_v_item, 0); if (unlikely(_
   return __pyx_r;
 }
 
-/* "utils_c.pyx":44
+/* "cython/parallel_utils.pyx":44
  *         dists[i] = min(dists[i],tmp)
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_pdist(double[:,::1] features):
+ * def pdist(double[:,::1] features):
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7utils_c_5parallel_pdist(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_4fmmd_14parallel_utils_5pdist(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7utils_c_5parallel_pdist = {"parallel_pdist", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7utils_c_5parallel_pdist, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7utils_c_5parallel_pdist(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_4fmmd_14parallel_utils_5pdist = {"pdist", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4fmmd_14parallel_utils_5pdist, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4fmmd_14parallel_utils_5pdist(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -18166,7 +18166,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("parallel_pdist (wrapper)", 0);
+  __Pyx_RefNannySetupContext("pdist (wrapper)", 0);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_features,0};
     PyObject* values[1] = {0};
@@ -18187,7 +18187,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "parallel_pdist") < 0)) __PYX_ERR(0, 44, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "pdist") < 0)) __PYX_ERR(0, 44, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -18198,14 +18198,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("parallel_pdist", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 44, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("pdist", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 44, __pyx_L3_error)
   __pyx_L3_error:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_features, 1);
-  __Pyx_AddTraceback("utils_c.parallel_pdist", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmmd.parallel_utils.pdist", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7utils_c_4parallel_pdist(__pyx_self, __pyx_v_features);
+  __pyx_r = __pyx_pf_4fmmd_14parallel_utils_4pdist(__pyx_self, __pyx_v_features);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_features, 1);
@@ -18213,7 +18213,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7utils_c_4parallel_pdist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_features) {
+static PyObject *__pyx_pf_4fmmd_14parallel_utils_4pdist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_features) {
   Py_ssize_t __pyx_v_N;
   Py_ssize_t __pyx_v_M;
   PyObject *__pyx_v_results = NULL;
@@ -18239,19 +18239,19 @@ static PyObject *__pyx_pf_7utils_c_4parallel_pdist(CYTHON_UNUSED PyObject *__pyx
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("parallel_pdist", 0);
+  __Pyx_RefNannySetupContext("pdist", 0);
 
-  /* "utils_c.pyx":47
+  /* "cython/parallel_utils.pyx":47
  * @cython.wraparound(False)
- * def parallel_pdist(double[:,::1] features):
+ * def pdist(double[:,::1] features):
  *     cdef Py_ssize_t N = features.shape[0]             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t M = N*(N-1)//2
  *     results = np.zeros(M)
  */
   __pyx_v_N = (__pyx_v_features.shape[0]);
 
-  /* "utils_c.pyx":48
- * def parallel_pdist(double[:,::1] features):
+  /* "cython/parallel_utils.pyx":48
+ * def pdist(double[:,::1] features):
  *     cdef Py_ssize_t N = features.shape[0]
  *     cdef Py_ssize_t M = N*(N-1)//2             # <<<<<<<<<<<<<<
  *     results = np.zeros(M)
@@ -18259,7 +18259,7 @@ static PyObject *__pyx_pf_7utils_c_4parallel_pdist(CYTHON_UNUSED PyObject *__pyx
  */
   __pyx_v_M = __Pyx_div_Py_ssize_t((__pyx_v_N * (__pyx_v_N - 1)), 2);
 
-  /* "utils_c.pyx":49
+  /* "cython/parallel_utils.pyx":49
  *     cdef Py_ssize_t N = features.shape[0]
  *     cdef Py_ssize_t M = N*(N-1)//2
  *     results = np.zeros(M)             # <<<<<<<<<<<<<<
@@ -18297,7 +18297,7 @@ static PyObject *__pyx_pf_7utils_c_4parallel_pdist(CYTHON_UNUSED PyObject *__pyx
   __pyx_v_results = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "utils_c.pyx":51
+  /* "cython/parallel_utils.pyx":51
  *     results = np.zeros(M)
  *     cdef Py_ssize_t i,j,idx
  *     cdef double[::1] results_view = results             # <<<<<<<<<<<<<<
@@ -18309,7 +18309,7 @@ static PyObject *__pyx_pf_7utils_c_4parallel_pdist(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "utils_c.pyx":52
+  /* "cython/parallel_utils.pyx":52
  *     cdef Py_ssize_t i,j,idx
  *     cdef double[::1] results_view = results
  *     cdef double tmp = 0.0             # <<<<<<<<<<<<<<
@@ -18318,7 +18318,7 @@ static PyObject *__pyx_pf_7utils_c_4parallel_pdist(CYTHON_UNUSED PyObject *__pyx
  */
   __pyx_v_tmp = 0.0;
 
-  /* "utils_c.pyx":53
+  /* "cython/parallel_utils.pyx":53
  *     cdef double[::1] results_view = results
  *     cdef double tmp = 0.0
  *     for idx in prange(M,nogil=True):             # <<<<<<<<<<<<<<
@@ -18374,7 +18374,7 @@ static PyObject *__pyx_pf_7utils_c_4parallel_pdist(CYTHON_UNUSED PyObject *__pyx
                             __pyx_v_j = ((Py_ssize_t)0xbad0bad0);
                             __pyx_v_tmp = ((double)__PYX_NAN());
 
-                            /* "utils_c.pyx":54
+                            /* "cython/parallel_utils.pyx":54
  *     cdef double tmp = 0.0
  *     for idx in prange(M,nogil=True):
  *         i = N - 2 - <Py_ssize_t>(sqrt(-8*idx + 4*N*(N-1)-7)/2.0 - 0.5)             # <<<<<<<<<<<<<<
@@ -18383,7 +18383,7 @@ static PyObject *__pyx_pf_7utils_c_4parallel_pdist(CYTHON_UNUSED PyObject *__pyx
  */
                             __pyx_v_i = ((__pyx_v_N - 2) - ((Py_ssize_t)((sqrt((((-8L * __pyx_v_idx) + ((4 * __pyx_v_N) * (__pyx_v_N - 1))) - 7)) / 2.0) - 0.5)));
 
-                            /* "utils_c.pyx":55
+                            /* "cython/parallel_utils.pyx":55
  *     for idx in prange(M,nogil=True):
  *         i = N - 2 - <Py_ssize_t>(sqrt(-8*idx + 4*N*(N-1)-7)/2.0 - 0.5)
  *         j = idx + i + 1 - M + (N-i)*((N-i)-1)//2             # <<<<<<<<<<<<<<
@@ -18392,7 +18392,7 @@ static PyObject *__pyx_pf_7utils_c_4parallel_pdist(CYTHON_UNUSED PyObject *__pyx
  */
                             __pyx_v_j = ((((__pyx_v_idx + __pyx_v_i) + 1) - __pyx_v_M) + __Pyx_div_Py_ssize_t(((__pyx_v_N - __pyx_v_i) * ((__pyx_v_N - __pyx_v_i) - 1)), 2));
 
-                            /* "utils_c.pyx":56
+                            /* "cython/parallel_utils.pyx":56
  *         i = N - 2 - <Py_ssize_t>(sqrt(-8*idx + 4*N*(N-1)-7)/2.0 - 0.5)
  *         j = idx + i + 1 - M + (N-i)*((N-i)-1)//2
  *         tmp = l2_dist(features[i],features[j])             # <<<<<<<<<<<<<<
@@ -18425,14 +18425,14 @@ __pyx_t_10.shape[0] = __pyx_v_features.shape[1];
 __pyx_t_10.strides[0] = __pyx_v_features.strides[1];
     __pyx_t_10.suboffsets[0] = -1;
 
-__pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__pyx_t_11 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 56, __pyx_L8_error)
+__pyx_t_11 = __pyx_f_4fmmd_14parallel_utils_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__pyx_t_11 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 56, __pyx_L8_error)
                             __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 0);
                             __pyx_t_6.memview = NULL; __pyx_t_6.data = NULL;
                             __PYX_XCLEAR_MEMVIEW(&__pyx_t_10, 0);
                             __pyx_t_10.memview = NULL; __pyx_t_10.data = NULL;
                             __pyx_v_tmp = __pyx_t_11;
 
-                            /* "utils_c.pyx":58
+                            /* "cython/parallel_utils.pyx":58
  *         tmp = l2_dist(features[i],features[j])
  *         # idx = N * i + j - ((i + 2) * (i + 1))//2
  *         results_view[idx]=tmp             # <<<<<<<<<<<<<<
@@ -18532,7 +18532,7 @@ __pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__
         #endif
       }
 
-      /* "utils_c.pyx":53
+      /* "cython/parallel_utils.pyx":53
  *     cdef double[::1] results_view = results
  *     cdef double tmp = 0.0
  *     for idx in prange(M,nogil=True):             # <<<<<<<<<<<<<<
@@ -18558,7 +18558,7 @@ __pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__
       }
   }
 
-  /* "utils_c.pyx":59
+  /* "cython/parallel_utils.pyx":59
  *         # idx = N * i + j - ((i + 2) * (i + 1))//2
  *         results_view[idx]=tmp
  *     return results             # <<<<<<<<<<<<<<
@@ -18570,12 +18570,12 @@ __pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__
   __pyx_r = __pyx_v_results;
   goto __pyx_L0;
 
-  /* "utils_c.pyx":44
+  /* "cython/parallel_utils.pyx":44
  *         dists[i] = min(dists[i],tmp)
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_pdist(double[:,::1] features):
+ * def pdist(double[:,::1] features):
  */
 
   /* function exit code */
@@ -18586,7 +18586,7 @@ __pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__
   __Pyx_XDECREF(__pyx_t_4);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_10, 1);
-  __Pyx_AddTraceback("utils_c.parallel_pdist", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmmd.parallel_utils.pdist", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_results);
@@ -18596,24 +18596,24 @@ __pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__
   return __pyx_r;
 }
 
-/* "utils_c.pyx":62
+/* "cython/parallel_utils.pyx":62
  * 
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_cdist(double[:,::1] x, double[:,::1] y ):
+ * def cdist(double[:,::1] x, double[:,::1] y ):
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7utils_c_7parallel_cdist(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_4fmmd_14parallel_utils_7cdist(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7utils_c_7parallel_cdist = {"parallel_cdist", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7utils_c_7parallel_cdist, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7utils_c_7parallel_cdist(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_4fmmd_14parallel_utils_7cdist = {"cdist", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4fmmd_14parallel_utils_7cdist, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_4fmmd_14parallel_utils_7cdist(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -18631,7 +18631,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("parallel_cdist (wrapper)", 0);
+  __Pyx_RefNannySetupContext("cdist (wrapper)", 0);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,0};
     PyObject* values[2] = {0,0};
@@ -18656,12 +18656,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_y)) != 0)) kw_args--;
         else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("parallel_cdist", 1, 2, 2, 1); __PYX_ERR(0, 62, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("cdist", 1, 2, 2, 1); __PYX_ERR(0, 62, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "parallel_cdist") < 0)) __PYX_ERR(0, 62, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "cdist") < 0)) __PYX_ERR(0, 62, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -18674,15 +18674,15 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("parallel_cdist", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 62, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("cdist", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 62, __pyx_L3_error)
   __pyx_L3_error:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_x, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_y, 1);
-  __Pyx_AddTraceback("utils_c.parallel_cdist", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmmd.parallel_utils.cdist", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7utils_c_6parallel_cdist(__pyx_self, __pyx_v_x, __pyx_v_y);
+  __pyx_r = __pyx_pf_4fmmd_14parallel_utils_6cdist(__pyx_self, __pyx_v_x, __pyx_v_y);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_x, 1);
@@ -18691,7 +18691,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7utils_c_6parallel_cdist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y) {
+static PyObject *__pyx_pf_4fmmd_14parallel_utils_6cdist(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_x, __Pyx_memviewslice __pyx_v_y) {
   Py_ssize_t __pyx_v_N;
   Py_ssize_t __pyx_v_M;
   PyObject *__pyx_v_results = NULL;
@@ -18717,19 +18717,19 @@ static PyObject *__pyx_pf_7utils_c_6parallel_cdist(CYTHON_UNUSED PyObject *__pyx
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("parallel_cdist", 0);
+  __Pyx_RefNannySetupContext("cdist", 0);
 
-  /* "utils_c.pyx":65
+  /* "cython/parallel_utils.pyx":65
  * @cython.wraparound(False)
- * def parallel_cdist(double[:,::1] x, double[:,::1] y ):
+ * def cdist(double[:,::1] x, double[:,::1] y ):
  *     cdef Py_ssize_t N = x.shape[0]             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t M = y.shape[0]
  *     results = np.zeros(N*M)
  */
   __pyx_v_N = (__pyx_v_x.shape[0]);
 
-  /* "utils_c.pyx":66
- * def parallel_cdist(double[:,::1] x, double[:,::1] y ):
+  /* "cython/parallel_utils.pyx":66
+ * def cdist(double[:,::1] x, double[:,::1] y ):
  *     cdef Py_ssize_t N = x.shape[0]
  *     cdef Py_ssize_t M = y.shape[0]             # <<<<<<<<<<<<<<
  *     results = np.zeros(N*M)
@@ -18737,7 +18737,7 @@ static PyObject *__pyx_pf_7utils_c_6parallel_cdist(CYTHON_UNUSED PyObject *__pyx
  */
   __pyx_v_M = (__pyx_v_y.shape[0]);
 
-  /* "utils_c.pyx":67
+  /* "cython/parallel_utils.pyx":67
  *     cdef Py_ssize_t N = x.shape[0]
  *     cdef Py_ssize_t M = y.shape[0]
  *     results = np.zeros(N*M)             # <<<<<<<<<<<<<<
@@ -18775,7 +18775,7 @@ static PyObject *__pyx_pf_7utils_c_6parallel_cdist(CYTHON_UNUSED PyObject *__pyx
   __pyx_v_results = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "utils_c.pyx":68
+  /* "cython/parallel_utils.pyx":68
  *     cdef Py_ssize_t M = y.shape[0]
  *     results = np.zeros(N*M)
  *     cdef double[::1] results_view = results             # <<<<<<<<<<<<<<
@@ -18787,7 +18787,7 @@ static PyObject *__pyx_pf_7utils_c_6parallel_cdist(CYTHON_UNUSED PyObject *__pyx
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "utils_c.pyx":70
+  /* "cython/parallel_utils.pyx":70
  *     cdef double[::1] results_view = results
  *     cdef Py_ssize_t i,j,idx
  *     cdef double tmp = 0.0             # <<<<<<<<<<<<<<
@@ -18796,7 +18796,7 @@ static PyObject *__pyx_pf_7utils_c_6parallel_cdist(CYTHON_UNUSED PyObject *__pyx
  */
   __pyx_v_tmp = 0.0;
 
-  /* "utils_c.pyx":71
+  /* "cython/parallel_utils.pyx":71
  *     cdef Py_ssize_t i,j,idx
  *     cdef double tmp = 0.0
  *     for idx in prange(N*M,nogil=True):             # <<<<<<<<<<<<<<
@@ -18852,7 +18852,7 @@ static PyObject *__pyx_pf_7utils_c_6parallel_cdist(CYTHON_UNUSED PyObject *__pyx
                             __pyx_v_j = ((Py_ssize_t)0xbad0bad0);
                             __pyx_v_tmp = ((double)__PYX_NAN());
 
-                            /* "utils_c.pyx":72
+                            /* "cython/parallel_utils.pyx":72
  *     cdef double tmp = 0.0
  *     for idx in prange(N*M,nogil=True):
  *         i = idx//M             # <<<<<<<<<<<<<<
@@ -18881,7 +18881,7 @@ static PyObject *__pyx_pf_7utils_c_6parallel_cdist(CYTHON_UNUSED PyObject *__pyx
                             }
                             __pyx_v_i = __Pyx_div_Py_ssize_t(__pyx_v_idx, __pyx_v_M);
 
-                            /* "utils_c.pyx":73
+                            /* "cython/parallel_utils.pyx":73
  *     for idx in prange(N*M,nogil=True):
  *         i = idx//M
  *         j = idx%M             # <<<<<<<<<<<<<<
@@ -18900,7 +18900,7 @@ static PyObject *__pyx_pf_7utils_c_6parallel_cdist(CYTHON_UNUSED PyObject *__pyx
                             }
                             __pyx_v_j = __Pyx_mod_Py_ssize_t(__pyx_v_idx, __pyx_v_M);
 
-                            /* "utils_c.pyx":74
+                            /* "cython/parallel_utils.pyx":74
  *         i = idx//M
  *         j = idx%M
  *         tmp = l2_dist(x[i],y[j])             # <<<<<<<<<<<<<<
@@ -18933,14 +18933,14 @@ __pyx_t_10.shape[0] = __pyx_v_y.shape[1];
 __pyx_t_10.strides[0] = __pyx_v_y.strides[1];
     __pyx_t_10.suboffsets[0] = -1;
 
-__pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__pyx_t_11 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 74, __pyx_L8_error)
+__pyx_t_11 = __pyx_f_4fmmd_14parallel_utils_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__pyx_t_11 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 74, __pyx_L8_error)
                             __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 0);
                             __pyx_t_6.memview = NULL; __pyx_t_6.data = NULL;
                             __PYX_XCLEAR_MEMVIEW(&__pyx_t_10, 0);
                             __pyx_t_10.memview = NULL; __pyx_t_10.data = NULL;
                             __pyx_v_tmp = __pyx_t_11;
 
-                            /* "utils_c.pyx":76
+                            /* "cython/parallel_utils.pyx":76
  *         tmp = l2_dist(x[i],y[j])
  *         # idx = N * i + j - ((i + 2) * (i + 1))//2
  *         results_view[idx]=tmp             # <<<<<<<<<<<<<<
@@ -19040,7 +19040,7 @@ __pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__
         #endif
       }
 
-      /* "utils_c.pyx":71
+      /* "cython/parallel_utils.pyx":71
  *     cdef Py_ssize_t i,j,idx
  *     cdef double tmp = 0.0
  *     for idx in prange(N*M,nogil=True):             # <<<<<<<<<<<<<<
@@ -19066,7 +19066,7 @@ __pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__
       }
   }
 
-  /* "utils_c.pyx":77
+  /* "cython/parallel_utils.pyx":77
  *         # idx = N * i + j - ((i + 2) * (i + 1))//2
  *         results_view[idx]=tmp
  *     return results             # <<<<<<<<<<<<<<
@@ -19078,12 +19078,12 @@ __pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__
   __pyx_r = __pyx_v_results;
   goto __pyx_L0;
 
-  /* "utils_c.pyx":62
+  /* "cython/parallel_utils.pyx":62
  * 
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_cdist(double[:,::1] x, double[:,::1] y ):
+ * def cdist(double[:,::1] x, double[:,::1] y ):
  */
 
   /* function exit code */
@@ -19094,7 +19094,7 @@ __pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__
   __Pyx_XDECREF(__pyx_t_4);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XCLEAR_MEMVIEW(&__pyx_t_10, 1);
-  __Pyx_AddTraceback("utils_c.parallel_cdist", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmmd.parallel_utils.cdist", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_results);
@@ -19104,24 +19104,25 @@ __pyx_t_11 = __pyx_f_7utils_c_l2_dist(__pyx_t_6, __pyx_t_10, 0); if (unlikely(__
   return __pyx_r;
 }
 
-/* "utils_c.pyx":79
+/* "cython/parallel_utils.pyx":79
  *     return results
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_edges(double[:,::1] features,double diversity_threshold):
+ * def edges(double[:,::1] features,double diversity_threshold):
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7utils_c_9parallel_edges(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_4fmmd_14parallel_utils_9edges(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7utils_c_9parallel_edges = {"parallel_edges", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7utils_c_9parallel_edges, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7utils_c_9parallel_edges(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_4fmmd_14parallel_utils_8edges, "\n    Returns the edges between items which have distance below a threshold.\n    ");
+static PyMethodDef __pyx_mdef_4fmmd_14parallel_utils_9edges = {"edges", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_4fmmd_14parallel_utils_9edges, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_4fmmd_14parallel_utils_8edges};
+static PyObject *__pyx_pw_4fmmd_14parallel_utils_9edges(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -19139,7 +19140,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("parallel_edges (wrapper)", 0);
+  __Pyx_RefNannySetupContext("edges (wrapper)", 0);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_features,&__pyx_n_s_diversity_threshold,0};
     PyObject* values[2] = {0,0};
@@ -19164,12 +19165,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_diversity_threshold)) != 0)) kw_args--;
         else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("parallel_edges", 1, 2, 2, 1); __PYX_ERR(0, 79, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("edges", 1, 2, 2, 1); __PYX_ERR(0, 79, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "parallel_edges") < 0)) __PYX_ERR(0, 79, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "edges") < 0)) __PYX_ERR(0, 79, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -19182,14 +19183,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("parallel_edges", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 79, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("edges", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 79, __pyx_L3_error)
   __pyx_L3_error:;
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_features, 1);
-  __Pyx_AddTraceback("utils_c.parallel_edges", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmmd.parallel_utils.edges", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7utils_c_8parallel_edges(__pyx_self, __pyx_v_features, __pyx_v_diversity_threshold);
+  __pyx_r = __pyx_pf_4fmmd_14parallel_utils_8edges(__pyx_self, __pyx_v_features, __pyx_v_diversity_threshold);
 
   /* function exit code */
   __PYX_XCLEAR_MEMVIEW(&__pyx_v_features, 1);
@@ -19197,7 +19198,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7utils_c_8parallel_edges(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_features, double __pyx_v_diversity_threshold) {
+static PyObject *__pyx_pf_4fmmd_14parallel_utils_8edges(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_features, double __pyx_v_diversity_threshold) {
   Py_ssize_t __pyx_v_N;
   Py_ssize_t __pyx_v_M;
   Py_ssize_t __pyx_v_i;
@@ -19238,19 +19239,19 @@ static PyObject *__pyx_pf_7utils_c_8parallel_edges(CYTHON_UNUSED PyObject *__pyx
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("parallel_edges", 0);
+  __Pyx_RefNannySetupContext("edges", 0);
 
-  /* "utils_c.pyx":82
- * @cython.wraparound(False)
- * def parallel_edges(double[:,::1] features,double diversity_threshold):
+  /* "cython/parallel_utils.pyx":85
+ *     Returns the edges between items which have distance below a threshold.
+ *     """
  *     cdef Py_ssize_t N = features.shape[0]             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t M = N*(N-1)//2
  *     cdef Py_ssize_t i,j,idx
  */
   __pyx_v_N = (__pyx_v_features.shape[0]);
 
-  /* "utils_c.pyx":83
- * def parallel_edges(double[:,::1] features,double diversity_threshold):
+  /* "cython/parallel_utils.pyx":86
+ *     """
  *     cdef Py_ssize_t N = features.shape[0]
  *     cdef Py_ssize_t M = N*(N-1)//2             # <<<<<<<<<<<<<<
  *     cdef Py_ssize_t i,j,idx
@@ -19258,7 +19259,7 @@ static PyObject *__pyx_pf_7utils_c_8parallel_edges(CYTHON_UNUSED PyObject *__pyx
  */
   __pyx_v_M = __Pyx_div_Py_ssize_t((__pyx_v_N * (__pyx_v_N - 1)), 2);
 
-  /* "utils_c.pyx":89
+  /* "cython/parallel_utils.pyx":92
  *     cdef vector[Py_ssize_t] u,v
  *     cdef vector[double] dist
  *     cdef double tmp = 0.0             # <<<<<<<<<<<<<<
@@ -19267,7 +19268,7 @@ static PyObject *__pyx_pf_7utils_c_8parallel_edges(CYTHON_UNUSED PyObject *__pyx
  */
   __pyx_v_tmp = 0.0;
 
-  /* "utils_c.pyx":91
+  /* "cython/parallel_utils.pyx":94
  *     cdef double tmp = 0.0
  *     cdef int tid,num_threads
  *     num_threads = openmp.omp_get_max_threads()             # <<<<<<<<<<<<<<
@@ -19276,7 +19277,7 @@ static PyObject *__pyx_pf_7utils_c_8parallel_edges(CYTHON_UNUSED PyObject *__pyx
  */
   __pyx_v_num_threads = omp_get_max_threads();
 
-  /* "utils_c.pyx":92
+  /* "cython/parallel_utils.pyx":95
  *     cdef int tid,num_threads
  *     num_threads = openmp.omp_get_max_threads()
  *     us.resize(num_threads)             # <<<<<<<<<<<<<<
@@ -19287,10 +19288,10 @@ static PyObject *__pyx_pf_7utils_c_8parallel_edges(CYTHON_UNUSED PyObject *__pyx
     __pyx_v_us.resize(__pyx_v_num_threads);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 92, __pyx_L1_error)
+    __PYX_ERR(0, 95, __pyx_L1_error)
   }
 
-  /* "utils_c.pyx":93
+  /* "cython/parallel_utils.pyx":96
  *     num_threads = openmp.omp_get_max_threads()
  *     us.resize(num_threads)
  *     vs.resize(num_threads)             # <<<<<<<<<<<<<<
@@ -19301,10 +19302,10 @@ static PyObject *__pyx_pf_7utils_c_8parallel_edges(CYTHON_UNUSED PyObject *__pyx
     __pyx_v_vs.resize(__pyx_v_num_threads);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 93, __pyx_L1_error)
+    __PYX_ERR(0, 96, __pyx_L1_error)
   }
 
-  /* "utils_c.pyx":94
+  /* "cython/parallel_utils.pyx":97
  *     us.resize(num_threads)
  *     vs.resize(num_threads)
  *     dists.resize(num_threads)             # <<<<<<<<<<<<<<
@@ -19315,15 +19316,15 @@ static PyObject *__pyx_pf_7utils_c_8parallel_edges(CYTHON_UNUSED PyObject *__pyx
     __pyx_v_dists.resize(__pyx_v_num_threads);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 94, __pyx_L1_error)
+    __PYX_ERR(0, 97, __pyx_L1_error)
   }
 
-  /* "utils_c.pyx":95
+  /* "cython/parallel_utils.pyx":98
  *     vs.resize(num_threads)
  *     dists.resize(num_threads)
  *     for idx in prange(M,nogil=True):             # <<<<<<<<<<<<<<
  *         tid = openmp.omp_get_thread_num()
- *         i = N - 2 - <Py_ssize_t>(sqrt(-8*idx + 4*N*(N-1)-7)/2.0 - 0.5)
+ *         # https://stackoverflow.com/questions/27086195/linear-index-upper-triangular-matrix
  */
   {
       #ifdef WITH_THREAD
@@ -19376,26 +19377,26 @@ static PyObject *__pyx_pf_7utils_c_8parallel_edges(CYTHON_UNUSED PyObject *__pyx
                             __pyx_v_tid = ((int)0xbad0bad0);
                             __pyx_v_tmp = ((double)__PYX_NAN());
 
-                            /* "utils_c.pyx":96
+                            /* "cython/parallel_utils.pyx":99
  *     dists.resize(num_threads)
  *     for idx in prange(M,nogil=True):
  *         tid = openmp.omp_get_thread_num()             # <<<<<<<<<<<<<<
+ *         # https://stackoverflow.com/questions/27086195/linear-index-upper-triangular-matrix
  *         i = N - 2 - <Py_ssize_t>(sqrt(-8*idx + 4*N*(N-1)-7)/2.0 - 0.5)
- *         j = idx + i + 1 - M + (N-i)*((N-i)-1)//2
  */
                             __pyx_v_tid = omp_get_thread_num();
 
-                            /* "utils_c.pyx":97
- *     for idx in prange(M,nogil=True):
+                            /* "cython/parallel_utils.pyx":101
  *         tid = openmp.omp_get_thread_num()
+ *         # https://stackoverflow.com/questions/27086195/linear-index-upper-triangular-matrix
  *         i = N - 2 - <Py_ssize_t>(sqrt(-8*idx + 4*N*(N-1)-7)/2.0 - 0.5)             # <<<<<<<<<<<<<<
  *         j = idx + i + 1 - M + (N-i)*((N-i)-1)//2
  *         tmp = l2_dist(features[i],features[j])
  */
                             __pyx_v_i = ((__pyx_v_N - 2) - ((Py_ssize_t)((sqrt((((-8L * __pyx_v_idx) + ((4 * __pyx_v_N) * (__pyx_v_N - 1))) - 7)) / 2.0) - 0.5)));
 
-                            /* "utils_c.pyx":98
- *         tid = openmp.omp_get_thread_num()
+                            /* "cython/parallel_utils.pyx":102
+ *         # https://stackoverflow.com/questions/27086195/linear-index-upper-triangular-matrix
  *         i = N - 2 - <Py_ssize_t>(sqrt(-8*idx + 4*N*(N-1)-7)/2.0 - 0.5)
  *         j = idx + i + 1 - M + (N-i)*((N-i)-1)//2             # <<<<<<<<<<<<<<
  *         tmp = l2_dist(features[i],features[j])
@@ -19403,7 +19404,7 @@ static PyObject *__pyx_pf_7utils_c_8parallel_edges(CYTHON_UNUSED PyObject *__pyx
  */
                             __pyx_v_j = ((((__pyx_v_idx + __pyx_v_i) + 1) - __pyx_v_M) + __Pyx_div_Py_ssize_t(((__pyx_v_N - __pyx_v_i) * ((__pyx_v_N - __pyx_v_i) - 1)), 2));
 
-                            /* "utils_c.pyx":99
+                            /* "cython/parallel_utils.pyx":103
  *         i = N - 2 - <Py_ssize_t>(sqrt(-8*idx + 4*N*(N-1)-7)/2.0 - 0.5)
  *         j = idx + i + 1 - M + (N-i)*((N-i)-1)//2
  *         tmp = l2_dist(features[i],features[j])             # <<<<<<<<<<<<<<
@@ -19436,14 +19437,14 @@ __pyx_t_5.shape[0] = __pyx_v_features.shape[1];
 __pyx_t_5.strides[0] = __pyx_v_features.strides[1];
     __pyx_t_5.suboffsets[0] = -1;
 
-__pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__pyx_t_6 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 99, __pyx_L8_error)
+__pyx_t_6 = __pyx_f_4fmmd_14parallel_utils_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__pyx_t_6 == ((double)-1) && __Pyx_ErrOccurredWithGIL())) __PYX_ERR(0, 103, __pyx_L8_error)
                             __PYX_XCLEAR_MEMVIEW(&__pyx_t_4, 0);
                             __pyx_t_4.memview = NULL; __pyx_t_4.data = NULL;
                             __PYX_XCLEAR_MEMVIEW(&__pyx_t_5, 0);
                             __pyx_t_5.memview = NULL; __pyx_t_5.data = NULL;
                             __pyx_v_tmp = __pyx_t_6;
 
-                            /* "utils_c.pyx":101
+                            /* "cython/parallel_utils.pyx":105
  *         tmp = l2_dist(features[i],features[j])
  *         # idx = N * i + j - ((i + 2) * (i + 1))//2
  *         if tmp < diversity_threshold:             # <<<<<<<<<<<<<<
@@ -19453,7 +19454,7 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
                             __pyx_t_7 = (__pyx_v_tmp < __pyx_v_diversity_threshold);
                             if (__pyx_t_7) {
 
-                              /* "utils_c.pyx":102
+                              /* "cython/parallel_utils.pyx":106
  *         # idx = N * i + j - ((i + 2) * (i + 1))//2
  *         if tmp < diversity_threshold:
  *             us[tid].push_back(i)             # <<<<<<<<<<<<<<
@@ -19470,10 +19471,10 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
                                 #ifdef WITH_THREAD
                                 __Pyx_PyGILState_Release(__pyx_gilstate_save);
                                 #endif
-                                __PYX_ERR(0, 102, __pyx_L8_error)
+                                __PYX_ERR(0, 106, __pyx_L8_error)
                               }
 
-                              /* "utils_c.pyx":103
+                              /* "cython/parallel_utils.pyx":107
  *         if tmp < diversity_threshold:
  *             us[tid].push_back(i)
  *             vs[tid].push_back(j)             # <<<<<<<<<<<<<<
@@ -19490,10 +19491,10 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
                                 #ifdef WITH_THREAD
                                 __Pyx_PyGILState_Release(__pyx_gilstate_save);
                                 #endif
-                                __PYX_ERR(0, 103, __pyx_L8_error)
+                                __PYX_ERR(0, 107, __pyx_L8_error)
                               }
 
-                              /* "utils_c.pyx":104
+                              /* "cython/parallel_utils.pyx":108
  *             us[tid].push_back(i)
  *             vs[tid].push_back(j)
  *             dists[tid].push_back(tmp)             # <<<<<<<<<<<<<<
@@ -19510,10 +19511,10 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
                                 #ifdef WITH_THREAD
                                 __Pyx_PyGILState_Release(__pyx_gilstate_save);
                                 #endif
-                                __PYX_ERR(0, 104, __pyx_L8_error)
+                                __PYX_ERR(0, 108, __pyx_L8_error)
                               }
 
-                              /* "utils_c.pyx":101
+                              /* "cython/parallel_utils.pyx":105
  *         tmp = l2_dist(features[i],features[j])
  *         # idx = N * i + j - ((i + 2) * (i + 1))//2
  *         if tmp < diversity_threshold:             # <<<<<<<<<<<<<<
@@ -19614,12 +19615,12 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
         #endif
       }
 
-      /* "utils_c.pyx":95
+      /* "cython/parallel_utils.pyx":98
  *     vs.resize(num_threads)
  *     dists.resize(num_threads)
  *     for idx in prange(M,nogil=True):             # <<<<<<<<<<<<<<
  *         tid = openmp.omp_get_thread_num()
- *         i = N - 2 - <Py_ssize_t>(sqrt(-8*idx + 4*N*(N-1)-7)/2.0 - 0.5)
+ *         # https://stackoverflow.com/questions/27086195/linear-index-upper-triangular-matrix
  */
       /*finally:*/ {
         /*normal exit:*/{
@@ -19640,7 +19641,7 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
       }
   }
 
-  /* "utils_c.pyx":107
+  /* "cython/parallel_utils.pyx":111
  * 
  *     # unroll all thread arrays
  *     for tid in range(num_threads):             # <<<<<<<<<<<<<<
@@ -19652,7 +19653,7 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
   for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
     __pyx_v_tid = __pyx_t_10;
 
-    /* "utils_c.pyx":108
+    /* "cython/parallel_utils.pyx":112
  *     # unroll all thread arrays
  *     for tid in range(num_threads):
  *         for _u in us[tid]:             # <<<<<<<<<<<<<<
@@ -19667,7 +19668,7 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
       ++__pyx_t_11;
       __pyx_v__u = __pyx_t_3;
 
-      /* "utils_c.pyx":109
+      /* "cython/parallel_utils.pyx":113
  *     for tid in range(num_threads):
  *         for _u in us[tid]:
  *             u.push_back(_u)             # <<<<<<<<<<<<<<
@@ -19678,10 +19679,10 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
         __pyx_v_u.push_back(__pyx_v__u);
       } catch(...) {
         __Pyx_CppExn2PyErr();
-        __PYX_ERR(0, 109, __pyx_L1_error)
+        __PYX_ERR(0, 113, __pyx_L1_error)
       }
 
-      /* "utils_c.pyx":108
+      /* "cython/parallel_utils.pyx":112
  *     # unroll all thread arrays
  *     for tid in range(num_threads):
  *         for _u in us[tid]:             # <<<<<<<<<<<<<<
@@ -19690,7 +19691,7 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
  */
     }
 
-    /* "utils_c.pyx":110
+    /* "cython/parallel_utils.pyx":114
  *         for _u in us[tid]:
  *             u.push_back(_u)
  *         for _v in vs[tid]:             # <<<<<<<<<<<<<<
@@ -19705,7 +19706,7 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
       ++__pyx_t_11;
       __pyx_v__v = __pyx_t_3;
 
-      /* "utils_c.pyx":111
+      /* "cython/parallel_utils.pyx":115
  *             u.push_back(_u)
  *         for _v in vs[tid]:
  *             v.push_back(_v)             # <<<<<<<<<<<<<<
@@ -19716,10 +19717,10 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
         __pyx_v_v.push_back(__pyx_v__v);
       } catch(...) {
         __Pyx_CppExn2PyErr();
-        __PYX_ERR(0, 111, __pyx_L1_error)
+        __PYX_ERR(0, 115, __pyx_L1_error)
       }
 
-      /* "utils_c.pyx":110
+      /* "cython/parallel_utils.pyx":114
  *         for _u in us[tid]:
  *             u.push_back(_u)
  *         for _v in vs[tid]:             # <<<<<<<<<<<<<<
@@ -19728,7 +19729,7 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
  */
     }
 
-    /* "utils_c.pyx":112
+    /* "cython/parallel_utils.pyx":116
  *         for _v in vs[tid]:
  *             v.push_back(_v)
  *         for _dist in dists[tid]:             # <<<<<<<<<<<<<<
@@ -19743,7 +19744,7 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
       ++__pyx_t_13;
       __pyx_v__dist = __pyx_t_6;
 
-      /* "utils_c.pyx":113
+      /* "cython/parallel_utils.pyx":117
  *             v.push_back(_v)
  *         for _dist in dists[tid]:
  *             dist.push_back(_dist)             # <<<<<<<<<<<<<<
@@ -19753,10 +19754,10 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
         __pyx_v_dist.push_back(__pyx_v__dist);
       } catch(...) {
         __Pyx_CppExn2PyErr();
-        __PYX_ERR(0, 113, __pyx_L1_error)
+        __PYX_ERR(0, 117, __pyx_L1_error)
       }
 
-      /* "utils_c.pyx":112
+      /* "cython/parallel_utils.pyx":116
  *         for _v in vs[tid]:
  *             v.push_back(_v)
  *         for _dist in dists[tid]:             # <<<<<<<<<<<<<<
@@ -19766,19 +19767,19 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
     }
   }
 
-  /* "utils_c.pyx":114
+  /* "cython/parallel_utils.pyx":118
  *         for _dist in dists[tid]:
  *             dist.push_back(_dist)
  *     return u,v,dist             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_15 = __pyx_convert_vector_to_py_Py_ssize_t(__pyx_v_u); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_15 = __pyx_convert_vector_to_py_Py_ssize_t(__pyx_v_u); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_15);
-  __pyx_t_16 = __pyx_convert_vector_to_py_Py_ssize_t(__pyx_v_v); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_16 = __pyx_convert_vector_to_py_Py_ssize_t(__pyx_v_v); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_16);
-  __pyx_t_17 = __pyx_convert_vector_to_py_double(__pyx_v_dist); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_17 = __pyx_convert_vector_to_py_double(__pyx_v_dist); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_17);
-  __pyx_t_18 = PyTuple_New(3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_18 = PyTuple_New(3); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_18);
   __Pyx_GIVEREF(__pyx_t_15);
   PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_t_15);
@@ -19793,12 +19794,12 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
   __pyx_t_18 = 0;
   goto __pyx_L0;
 
-  /* "utils_c.pyx":79
+  /* "cython/parallel_utils.pyx":79
  *     return results
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_edges(double[:,::1] features,double diversity_threshold):
+ * def edges(double[:,::1] features,double diversity_threshold):
  */
 
   /* function exit code */
@@ -19809,7 +19810,7 @@ __pyx_t_6 = __pyx_f_7utils_c_l2_dist(__pyx_t_4, __pyx_t_5, 0); if (unlikely(__py
   __Pyx_XDECREF(__pyx_t_16);
   __Pyx_XDECREF(__pyx_t_17);
   __Pyx_XDECREF(__pyx_t_18);
-  __Pyx_AddTraceback("utils_c.parallel_edges", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("fmmd.parallel_utils.edges", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -19947,7 +19948,7 @@ static PyType_Slot __pyx_type___pyx_array_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_array_spec = {
-  "utils_c.array",
+  "fmmd.parallel_utils.array",
   sizeof(struct __pyx_array_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_SEQUENCE,
@@ -19993,7 +19994,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "utils_c.""array", /*tp_name*/
+  "fmmd.parallel_utils.""array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -20146,7 +20147,7 @@ static PyType_Slot __pyx_type___pyx_MemviewEnum_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_MemviewEnum_spec = {
-  "utils_c.Enum",
+  "fmmd.parallel_utils.Enum",
   sizeof(struct __pyx_MemviewEnum_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,
@@ -20156,7 +20157,7 @@ static PyType_Spec __pyx_type___pyx_MemviewEnum_spec = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "utils_c.""Enum", /*tp_name*/
+  "fmmd.parallel_utils.""Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -20446,7 +20447,7 @@ static PyType_Slot __pyx_type___pyx_memoryview_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_memoryview_spec = {
-  "utils_c.memoryview",
+  "fmmd.parallel_utils.memoryview",
   sizeof(struct __pyx_memoryview_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,
@@ -20492,7 +20493,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "utils_c.""memoryview", /*tp_name*/
+  "fmmd.parallel_utils.""memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -20646,7 +20647,7 @@ static PyType_Slot __pyx_type___pyx_memoryviewslice_slots[] = {
   {0, 0},
 };
 static PyType_Spec __pyx_type___pyx_memoryviewslice_spec = {
-  "utils_c._memoryviewslice",
+  "fmmd.parallel_utils._memoryviewslice",
   sizeof(struct __pyx_memoryviewslice_obj),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_SEQUENCE,
@@ -20656,7 +20657,7 @@ static PyType_Spec __pyx_type___pyx_memoryviewslice_spec = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "utils_c.""_memoryviewslice", /*tp_name*/
+  "fmmd.parallel_utils.""_memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -20805,6 +20806,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
     {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
     {&__pyx_n_u_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 1, 0, 1},
+    {&__pyx_n_s_cdist, __pyx_k_cdist, sizeof(__pyx_k_cdist), 0, 0, 1, 1},
     {&__pyx_n_s_class, __pyx_k_class, sizeof(__pyx_k_class), 0, 0, 1, 1},
     {&__pyx_n_s_class_getitem, __pyx_k_class_getitem, sizeof(__pyx_k_class_getitem), 0, 0, 1, 1},
     {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
@@ -20813,6 +20815,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
     {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
     {&__pyx_n_s_count, __pyx_k_count, sizeof(__pyx_k_count), 0, 0, 1, 1},
+    {&__pyx_kp_s_cython_parallel_utils_pyx, __pyx_k_cython_parallel_utils_pyx, sizeof(__pyx_k_cython_parallel_utils_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
     {&__pyx_kp_u_disable, __pyx_k_disable, sizeof(__pyx_k_disable), 0, 1, 0, 0},
     {&__pyx_n_s_dist, __pyx_k_dist, sizeof(__pyx_k_dist), 0, 0, 1, 1},
@@ -20820,6 +20823,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_dists, __pyx_k_dists, sizeof(__pyx_k_dists), 0, 0, 1, 1},
     {&__pyx_n_s_diversity_threshold, __pyx_k_diversity_threshold, sizeof(__pyx_k_diversity_threshold), 0, 0, 1, 1},
     {&__pyx_n_s_dtype_is_object, __pyx_k_dtype_is_object, sizeof(__pyx_k_dtype_is_object), 0, 0, 1, 1},
+    {&__pyx_n_s_edges, __pyx_k_edges, sizeof(__pyx_k_edges), 0, 0, 1, 1},
     {&__pyx_n_s_elements, __pyx_k_elements, sizeof(__pyx_k_elements), 0, 0, 1, 1},
     {&__pyx_kp_u_enable, __pyx_k_enable, sizeof(__pyx_k_enable), 0, 1, 0, 0},
     {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
@@ -20827,6 +20831,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_error, __pyx_k_error, sizeof(__pyx_k_error), 0, 0, 1, 1},
     {&__pyx_n_s_features, __pyx_k_features, sizeof(__pyx_k_features), 0, 0, 1, 1},
     {&__pyx_n_s_flags, __pyx_k_flags, sizeof(__pyx_k_flags), 0, 0, 1, 1},
+    {&__pyx_n_s_fmmd_parallel_utils, __pyx_k_fmmd_parallel_utils, sizeof(__pyx_k_fmmd_parallel_utils), 0, 0, 1, 1},
     {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
     {&__pyx_n_s_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 0, 1, 1},
     {&__pyx_n_u_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 1, 0, 1},
@@ -20861,9 +20866,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
     {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
     {&__pyx_n_s_pack, __pyx_k_pack, sizeof(__pyx_k_pack), 0, 0, 1, 1},
-    {&__pyx_n_s_parallel_cdist, __pyx_k_parallel_cdist, sizeof(__pyx_k_parallel_cdist), 0, 0, 1, 1},
-    {&__pyx_n_s_parallel_edges, __pyx_k_parallel_edges, sizeof(__pyx_k_parallel_edges), 0, 0, 1, 1},
-    {&__pyx_n_s_parallel_pdist, __pyx_k_parallel_pdist, sizeof(__pyx_k_parallel_pdist), 0, 0, 1, 1},
+    {&__pyx_n_s_pdist, __pyx_k_pdist, sizeof(__pyx_k_pdist), 0, 0, 1, 1},
     {&__pyx_n_s_pickle, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
     {&__pyx_n_s_pyx_PickleError, __pyx_k_pyx_PickleError, sizeof(__pyx_k_pyx_PickleError), 0, 0, 1, 1},
     {&__pyx_n_s_pyx_checksum, __pyx_k_pyx_checksum, sizeof(__pyx_k_pyx_checksum), 0, 0, 1, 1},
@@ -20904,8 +20907,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_update, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
     {&__pyx_n_s_update_dists, __pyx_k_update_dists, sizeof(__pyx_k_update_dists), 0, 0, 1, 1},
     {&__pyx_n_s_us, __pyx_k_us, sizeof(__pyx_k_us), 0, 0, 1, 1},
-    {&__pyx_n_s_utils_c, __pyx_k_utils_c, sizeof(__pyx_k_utils_c), 0, 0, 1, 1},
-    {&__pyx_kp_s_utils_c_pyx, __pyx_k_utils_c_pyx, sizeof(__pyx_k_utils_c_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_v, __pyx_k_v, sizeof(__pyx_k_v), 0, 0, 1, 1},
     {&__pyx_n_s_v_2, __pyx_k_v_2, sizeof(__pyx_k_v_2), 0, 0, 1, 1},
     {&__pyx_n_s_version_info, __pyx_k_version_info, sizeof(__pyx_k_version_info), 0, 0, 1, 1},
@@ -21076,7 +21077,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__18);
   __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_Enum, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(1, 1, __pyx_L1_error)
 
-  /* "utils_c.pyx":24
+  /* "cython/parallel_utils.pyx":24
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef double l2_dist(double[::1] x, double[::1] y) nogil:             # <<<<<<<<<<<<<<
@@ -21086,9 +21087,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__20 = PyTuple_Pack(2, __pyx_n_s_x, __pyx_n_s_y); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__20);
   __Pyx_GIVEREF(__pyx_tuple__20);
-  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_utils_c_pyx, __pyx_n_s_l2_dist, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__20, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_parallel_utils_pyx, __pyx_n_s_l2_dist, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 24, __pyx_L1_error)
 
-  /* "utils_c.pyx":34
+  /* "cython/parallel_utils.pyx":34
  *     return sqrt(total)
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
@@ -21098,43 +21099,43 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__22 = PyTuple_Pack(6, __pyx_n_s_dists, __pyx_n_s_elements, __pyx_n_s_item, __pyx_n_s_num, __pyx_n_s_i, __pyx_n_s_tmp); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
-  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_utils_c_pyx, __pyx_n_s_update_dists, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_parallel_utils_pyx, __pyx_n_s_update_dists, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 34, __pyx_L1_error)
 
-  /* "utils_c.pyx":44
+  /* "cython/parallel_utils.pyx":44
  *         dists[i] = min(dists[i],tmp)
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_pdist(double[:,::1] features):
+ * def pdist(double[:,::1] features):
  */
   __pyx_tuple__24 = PyTuple_Pack(9, __pyx_n_s_features, __pyx_n_s_N, __pyx_n_s_M, __pyx_n_s_results, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_idx, __pyx_n_s_results_view, __pyx_n_s_tmp); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__24);
   __Pyx_GIVEREF(__pyx_tuple__24);
-  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_utils_c_pyx, __pyx_n_s_parallel_pdist, 44, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_parallel_utils_pyx, __pyx_n_s_pdist, 44, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 44, __pyx_L1_error)
 
-  /* "utils_c.pyx":62
+  /* "cython/parallel_utils.pyx":62
  * 
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_cdist(double[:,::1] x, double[:,::1] y ):
+ * def cdist(double[:,::1] x, double[:,::1] y ):
  */
   __pyx_tuple__26 = PyTuple_Pack(10, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_N, __pyx_n_s_M, __pyx_n_s_results, __pyx_n_s_results_view, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_idx, __pyx_n_s_tmp); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__26);
   __Pyx_GIVEREF(__pyx_tuple__26);
-  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_utils_c_pyx, __pyx_n_s_parallel_cdist, 62, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_parallel_utils_pyx, __pyx_n_s_cdist, 62, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 62, __pyx_L1_error)
 
-  /* "utils_c.pyx":79
+  /* "cython/parallel_utils.pyx":79
  *     return results
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_edges(double[:,::1] features,double diversity_threshold):
+ * def edges(double[:,::1] features,double diversity_threshold):
  */
   __pyx_tuple__28 = PyTuple_Pack(19, __pyx_n_s_features, __pyx_n_s_diversity_threshold, __pyx_n_s_N, __pyx_n_s_M, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_idx, __pyx_n_s_us, __pyx_n_s_vs, __pyx_n_s_dists, __pyx_n_s_u, __pyx_n_s_v, __pyx_n_s_dist, __pyx_n_s_tmp, __pyx_n_s_tid, __pyx_n_s_num_threads, __pyx_n_s_u_2, __pyx_n_s_v_2, __pyx_n_s_dist_2); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
-  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 19, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_utils_c_pyx, __pyx_n_s_parallel_edges, 79, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 19, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_parallel_utils_pyx, __pyx_n_s_edges, 79, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -21399,10 +21400,10 @@ static int __Pyx_modinit_function_import_code(void) {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec_utils_c(PyObject* module); /*proto*/
+static int __pyx_pymod_exec_parallel_utils(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec_utils_c},
+  {Py_mod_exec, (void*)__pyx_pymod_exec_parallel_utils},
   {0, NULL}
 };
 #endif
@@ -21415,7 +21416,7 @@ namespace {
   #endif
   {
       PyModuleDef_HEAD_INIT,
-      "utils_c",
+      "parallel_utils",
       0, /* m_doc */
     #if CYTHON_PEP489_MULTI_PHASE_INIT
       0, /* m_size */
@@ -21463,11 +21464,11 @@ namespace {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC initutils_c(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC initutils_c(void)
+__Pyx_PyMODINIT_FUNC initparallel_utils(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC initparallel_utils(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit_utils_c(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC PyInit_utils_c(void)
+__Pyx_PyMODINIT_FUNC PyInit_parallel_utils(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit_parallel_utils(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -21548,7 +21549,7 @@ bad:
 }
 
 
-static CYTHON_SMALL_CODE int __pyx_pymod_exec_utils_c(PyObject *__pyx_pyinit_module)
+static CYTHON_SMALL_CODE int __pyx_pymod_exec_parallel_utils(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -21571,7 +21572,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_utils_c(PyObject *__pyx_pyinit_mod
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m) {
     if (__pyx_m == __pyx_pyinit_module) return 0;
-    PyErr_SetString(PyExc_RuntimeError, "Module 'utils_c' has already been imported. Re-initialisation is not supported.");
+    PyErr_SetString(PyExc_RuntimeError, "Module 'parallel_utils' has already been imported. Re-initialisation is not supported.");
     return -1;
   }
   #elif PY_MAJOR_VERSION >= 3
@@ -21583,13 +21584,13 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_utils_c(PyObject *__pyx_pyinit_mod
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("utils_c", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("parallel_utils", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   if (unlikely(!__pyx_m)) __PYX_ERR(0, 1, __pyx_L1_error)
   #elif CYTHON_USE_MODULE_STATE
   __pyx_t_1 = PyModule_Create(&__pyx_moduledef); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   {
     int add_module_result = PyState_AddModule(__pyx_t_1, &__pyx_moduledef);
-    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to utils_c pseudovariable */
+    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to parallel_utils pseudovariable */
     if (unlikely((add_module_result < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
     pystate_addmodule_run = 1;
   }
@@ -21615,7 +21616,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_utils_c(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_parallel_utils(void)", 0);
   if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
@@ -21653,14 +21654,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_utils_c) {
+  if (__pyx_module_is_main_fmmd__parallel_utils) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name_2, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "utils_c")) {
-      if (unlikely((PyDict_SetItemString(modules, "utils_c", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "fmmd.parallel_utils")) {
+      if (unlikely((PyDict_SetItemString(modules, "fmmd.parallel_utils", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -22194,7 +22195,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_Enum, __pyx_t_7) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "utils_c.pyx":8
+  /* "cython/parallel_utils.pyx":8
  * cimport cython
  * from libc.math cimport sqrt, floor
  * import numpy as np             # <<<<<<<<<<<<<<
@@ -22206,67 +22207,67 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_7) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "utils_c.pyx":24
+  /* "cython/parallel_utils.pyx":24
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef double l2_dist(double[::1] x, double[::1] y) nogil:             # <<<<<<<<<<<<<<
  *     cdef double total = 0
  *     cdef Py_ssize_t i
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_7utils_c_1l2_dist, 0, __pyx_n_s_l2_dist, NULL, __pyx_n_s_utils_c, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_4fmmd_14parallel_utils_1l2_dist, 0, __pyx_n_s_l2_dist, NULL, __pyx_n_s_fmmd_parallel_utils, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_l2_dist, __pyx_t_7) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "utils_c.pyx":34
+  /* "cython/parallel_utils.pyx":34
  *     return sqrt(total)
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
  * def update_dists(double[::1] dists,double[:,::1] elements, double[::1] item):
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_7utils_c_3update_dists, 0, __pyx_n_s_update_dists, NULL, __pyx_n_s_utils_c, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_4fmmd_14parallel_utils_3update_dists, 0, __pyx_n_s_update_dists, NULL, __pyx_n_s_fmmd_parallel_utils, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_update_dists, __pyx_t_7) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "utils_c.pyx":44
+  /* "cython/parallel_utils.pyx":44
  *         dists[i] = min(dists[i],tmp)
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_pdist(double[:,::1] features):
+ * def pdist(double[:,::1] features):
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_7utils_c_5parallel_pdist, 0, __pyx_n_s_parallel_pdist, NULL, __pyx_n_s_utils_c, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_4fmmd_14parallel_utils_5pdist, 0, __pyx_n_s_pdist, NULL, __pyx_n_s_fmmd_parallel_utils, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_parallel_pdist, __pyx_t_7) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pdist, __pyx_t_7) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "utils_c.pyx":62
+  /* "cython/parallel_utils.pyx":62
  * 
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_cdist(double[:,::1] x, double[:,::1] y ):
+ * def cdist(double[:,::1] x, double[:,::1] y ):
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_7utils_c_7parallel_cdist, 0, __pyx_n_s_parallel_cdist, NULL, __pyx_n_s_utils_c, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_4fmmd_14parallel_utils_7cdist, 0, __pyx_n_s_cdist, NULL, __pyx_n_s_fmmd_parallel_utils, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_parallel_cdist, __pyx_t_7) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cdist, __pyx_t_7) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "utils_c.pyx":79
+  /* "cython/parallel_utils.pyx":79
  *     return results
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
  * @cython.wraparound(False)
- * def parallel_edges(double[:,::1] features,double diversity_threshold):
+ * def edges(double[:,::1] features,double diversity_threshold):
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_7utils_c_9parallel_edges, 0, __pyx_n_s_parallel_edges, NULL, __pyx_n_s_utils_c, __pyx_d, ((PyObject *)__pyx_codeobj__29)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_4fmmd_14parallel_utils_9edges, 0, __pyx_n_s_edges, NULL, __pyx_n_s_fmmd_parallel_utils, __pyx_d, ((PyObject *)__pyx_codeobj__29)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_parallel_edges, __pyx_t_7) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_edges, __pyx_t_7) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "utils_c.pyx":1
+  /* "cython/parallel_utils.pyx":1
  * # distutils: language = c++             # <<<<<<<<<<<<<<
  * # distutils: extra_compile_args=-fopenmp -std=c++11 -std=gnu++11
  * # distutils: extra_link_args=-fopenmp
@@ -22285,7 +22286,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_7);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
-      __Pyx_AddTraceback("init utils_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init fmmd.parallel_utils", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     #if !CYTHON_USE_MODULE_STATE
     Py_CLEAR(__pyx_m);
@@ -22299,7 +22300,7 @@ if (!__Pyx_RefNanny) {
     }
     #endif
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init utils_c");
+    PyErr_SetString(PyExc_ImportError, "init fmmd.parallel_utils");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();

@@ -1,7 +1,7 @@
 from gurobipy import GRB
 import gurobipy as gp
 import numpy as np
-from fmmd.utils_c import update_dists, l2_dist, parallel_pdist, parallel_cdist, parallel_edges
+from fmmd import parallel_utils
 from tqdm.auto import tqdm, trange
 from typing import List, Tuple, Optional, Set, Dict
 import networkx as nx
@@ -58,7 +58,7 @@ def gonzales_algorithm(
         # update diversity for each solution
         for solution_idx in solution_idxs:
             sol_div = min(sol_div, element_distances[solution_idx])
-            update_dists(element_distances, features, features[solution_idx])
+            parallel_utils.update_dists(element_distances, features, features[solution_idx])
     elif initial_sol_distances is not None and initial_sol_diversity is not None:
         element_distances = initial_sol_distances
         sol_div = initial_sol_diversity
@@ -79,7 +79,7 @@ def gonzales_algorithm(
         logger.debug(f"\t\tAdded item {ids[max_idx]}")
         solution_idxs.add(max_idx)
         # update the closest distance to current candidate set
-        update_dists(element_distances, features, max_item)
+        parallel_utils.update_dists(element_distances, features, max_item)
         if _tqdm:
             pbar.update()
     if _tqdm:
@@ -215,7 +215,7 @@ def get_coreset_graph(
         # find edges between solution items where 
         # distance is below the threshold
         start = time()
-        us,vs,dists = parallel_edges(features[solution_idxs],diversity)
+        us,vs,dists = parallel_utils.edges(features[solution_idxs],diversity)
         parallel_edges_time = time() - start
         logger.info(f"{parallel_edges_time=}")
         
@@ -455,13 +455,13 @@ def compute_diversity(solution: set, features: np.ndarray, ids: np.ndarray) -> f
     solution_idxs = sorter[np.searchsorted(ids, _solution, sorter=sorter)]
     diversity = np.inf
     for i, j in combinations(solution_idxs, 2):
-        diversity = min(diversity, l2_dist(features[i], features[j]))
+        diversity = min(diversity, parallel_utils.l2_dist(features[i], features[j]))
     return diversity
 
 def compute_diversity_parallel(solution: set, features:np.ndarray, ids:np.ndarray) -> float:
     _solution = sorted(list(solution))
     sorter = np.argsort(ids)
     solution_idxs = sorter[np.searchsorted(ids, _solution, sorter=sorter)]
-    dists = parallel_pdist(features[solution_idxs])
+    dists = parallel_utils.pdist(features[solution_idxs])
     diversity = np.min(dists)
     return diversity
