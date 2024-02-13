@@ -1,4 +1,9 @@
-data/
+data/*
+!data/census.csv
+!data/census_small.csv
+!data/ecco_metadata.csv
+!data/sections_genre_with_seq.csv
+!data/section_embeddings_pca.npz
 
 .DS_store
 
