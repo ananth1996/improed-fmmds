@@ -90,10 +90,30 @@ For the full census dataset. `k` is the number of samples and `C` is the number 
 100 | 14 | 3670.781 | 39.722  | 92.41 |
 
 
-### Multicore performance
+### Multicore performance for Balanced Sampling
 
 The benefit of many cores comes when there is balanced sampling performed.
 
+For the ECCO dataset, there are 4.2 million items and 137 groups with a very skewed distribution. The requirement was at least 3000 balanced samples. With the group distribution resulted in the following:
+1. Maximum of `26`  samples from each group
+2. `3063` total samples
+
+
+The items are `768` dimensional embedding which take 3min to load the 22GB vectors.
+
+
+The FFMD-S solution takes 9250.9 seconds (2.5hrs).
+
+
+The FMMD-S algorithm has the following stages:
+1. Finding an initial greedy solution without thinking of buckets: **1615.6 sec**
+2. Finding a core-set of the data from buckets starting from the initial samples : **1832.83 sec**
+3. Computing pair-wise distances and selecting ones which are below a diversity threshold: **5779.5  sec**
+4. Creating a coreset graph with nodes from 2 and edges from 3: **0.69 sec**
+5. Solving an Integer Linear Program of a coreset from 4 to get final solution: **17.27 sec**
+
+All these times are on a system with 40 cores and 80GB RAM (of which only 25GB was actually used)
+The main bottleneck as seen is step 3. This is because we end up with 274,398 items in the coreset leading to the computation of nearly 37B pair-wise distances. After step 3 we only have 253 edges below the required threshold, so the rest of the algorithm is very quick.
 
 
 ## Limitations and Future Updates
@@ -104,4 +124,3 @@ There are some limitations compared to the original implementations. These will 
 2. No ability to generate multiple solutions in parallel to obtain best overall diversity
    
 
-   
