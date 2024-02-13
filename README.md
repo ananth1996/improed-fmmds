@@ -3,6 +3,20 @@
 An improved implementation of the FMMD-S algorithm from the paper:
 >Wang, Y., Mathioudakis, M., Li, J., & Fabbri, F. (2023). Max-Min Diversification with Fairness Constraints: Exact and Approximation Algorithms. In Proceedings of the 2023 SIAM International Conference on Data Mining (SDM) (pp. 91–99). Society for Industrial and Applied Mathematics. https://doi.org/10.1137/1.9781611977653.ch11 
 
+## Table of Contents
+
+- [Improved FMMD-S](#improved-fmmd-s)
+  - [Table of Contents](#table-of-contents)
+  - [Setup](#setup)
+    - [Python](#python)
+    - [Gurobi](#gurobi)
+    - [Cython](#cython)
+  - [Balanced Sampling](#balanced-sampling)
+    - [Old FMMD-S implementation Bottlenecks](#old-fmmd-s-implementation-bottlenecks)
+  - [Benchmarks](#benchmarks)
+    - [Relative Speedups](#relative-speedups)
+    - [Multicore performance for Balanced Sampling](#multicore-performance-for-balanced-sampling)
+  - [Limitations and Future Updates](#limitations-and-future-updates)
 
 ## Setup 
 
@@ -12,6 +26,11 @@ An improved implementation of the FMMD-S algorithm from the paper:
 conda env create -n fmmd -f env.yaml
 ```
 
+### Gurobi
+
+The FMMD-S algorithm uses [Gurobi](https://www.gurobi.com) to solve the MIS problem as explained in the paper. 
+
+The gurobi optimizer can be used without a license for small datasets, but for larger datasets it is recommended to have an [academic licence](https://www.gurobi.com/academia/academic-program-and-licenses/).
 
 ### Cython
 This library uses Cython to parallelize several utility functions. 
@@ -62,7 +81,7 @@ This sort of balanced sampling constraints causes several bottlenecks in the ori
 We fix these issues in the new implementations. Along with these fixes, a parallelization of several portions of the algorithm offer a general speedup compared the original implementation.
 
 
-## Benchmarking
+## Benchmarks
 
 
 Running the benchmark on the Census dataset from the original paper.
@@ -85,9 +104,9 @@ For the full census dataset. `k` is the number of samples and `C` is the number 
 | k| C | Original (in seconds) | New (in seconds) | Relative Speedup |
 |:---|---:|---:|---:|---:|
 10 | 2 | 112.67 | 10.49 |  10.73x |
-10 | 7 | 106.24 | 10.71 | 9.91 |
-50 | 14 | 474.152 | 19.06  | 24.88 |
-100 | 14 | 3670.781 | 39.722  | 92.41 |
+10 | 7 | 106.24 | 10.71 | 9.91x |
+50 | 14 | 474.152 | 19.06  | 24.88x |
+100 | 14 | 3670.781 | 39.722  | 92.41x |
 
 
 ### Multicore performance for Balanced Sampling
