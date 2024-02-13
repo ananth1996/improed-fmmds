@@ -143,14 +143,16 @@ def group_gonzales_algorithm(
                 # add all group items
                 final_solution.update(_ids)
                 _diversity = compute_diversity(_ids,_features,_ids)
-                # overall diversity threshold reduces
+                # Check if overall diversity threshold reduces
                 if _diversity < diversity_threshold:
-                    # set this to not return
+                    # update the diversity threshold
                     diversity_threshold = _diversity
                     logger.info(f"Added full group {group} and diversity threshold changed to: {diversity_threshold:e}. Restarting")
+                    # set the flag to restart
                     under_capped = True
                     break
                 else:
+                    # just continue with other groups
                     logger.info(f"Added full group {group} and diversity threshold didn't change. Continuing")
                     continue
             
@@ -166,6 +168,7 @@ def group_gonzales_algorithm(
             else:
                 _initial_solution_distances = working_data[group][0]
                 _initial_solution_diversity = working_data[group][1]
+            # Runs the Gonzales algorithm for the group
             _group_solution, _group_solution_diversity, _group_solution_distances, success = gonzales_algorithm(
                 _initial_solution, _features, _ids, k, diversity_threshold, lower_constraint, _initial_solution_distances, _initial_solution_diversity, _tqdm=False)
             # update working data
@@ -174,6 +177,7 @@ def group_gonzales_algorithm(
             final_solution.update(_group_solution)
             # if the algorithm was unsuccessful
             if not success:
+                # set flag to restart
                 under_capped = True
                 diversity_threshold = (1-eps)*diversity_threshold
                 logger.info(
@@ -212,9 +216,9 @@ def get_coreset_graph(
         # ensure that order of features is same as that in solutions
         sorter = np.argsort(ids)
         solution_idxs = sorter[np.searchsorted(ids, _solution, sorter=sorter)]
+        start = time()
         # find edges between solution items where 
         # distance is below the threshold
-        start = time()
         us,vs,dists = parallel_utils.edges(features[solution_idxs],diversity)
         parallel_edges_time = time() - start
         logger.info(f"{parallel_edges_time=}")
