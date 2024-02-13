@@ -15,7 +15,8 @@ An improved implementation of the FMMD-S algorithm from the paper:
     - [Old FMMD-S implementation Bottlenecks](#old-fmmd-s-implementation-bottlenecks)
   - [Benchmarks](#benchmarks)
     - [Relative Speedups](#relative-speedups)
-    - [Multicore performance for Balanced Sampling](#multicore-performance-for-balanced-sampling)
+    - [Multicore Performance](#multicore-performance)
+    - [Balanced Sampling Performance](#balanced-sampling-performance)
   - [Limitations and Future Updates](#limitations-and-future-updates)
 
 ## Setup 
@@ -101,6 +102,8 @@ python census_single_solution.py -k=10 -C=2 --old
 
 For the full census dataset. `k` is the number of samples and `C` is the number of groups. 
 
+Experiments on an Apple MacBook Pro with a M2 Pro chip (12 cores)
+
 | k| C | Original (in seconds) | New (in seconds) | Relative Speedup |
 |:---|---:|---:|---:|---:|
 10 | 2 | 112.67 | 10.49 |  10.73x |
@@ -108,8 +111,26 @@ For the full census dataset. `k` is the number of samples and `C` is the number 
 50 | 14 | 474.152 | 19.06  | 24.88x |
 100 | 14 | 3670.781 | 39.722  | 92.41x |
 
+### Multicore Performance 
 
-### Multicore performance for Balanced Sampling
+Command profiled:
+```
+python ecco_balanced_samples.py -k=500 --pca --eps=0.5
+```
+
+
+Machine with 32 cores and 20GB RAM
+
+| Cores | Mean [s] | Min [s] | Max [s] | Relative |
+|:---|---:|---:|---:|---:|
+| 1 | 467.493 | 467.493 | 467.493 | 1.60 |
+| 2 | 486.803 | 486.803 | 486.803 | 1.67 |
+| 4 | 499.324 | 499.324 | 499.324 | 1.71 |
+| 8 | 373.913 | 373.913 | 373.913 | 1.28 |
+| 16 | 291.706 | 291.706 | 291.706 | 1.00 |
+| 32 | 301.964 | 301.964 | 301.964 | 1.04 |
+
+### Balanced Sampling Performance
 
 The benefit of many cores comes when there is balanced sampling performed.
 
