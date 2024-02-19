@@ -9,15 +9,15 @@ import numpy as np
 cimport openmp
 from libcpp.vector cimport vector
 
-@cython.boundscheck(False)
-@cython.wraparound(False)
-cdef double dist_parallel(double[::1] x, double[::1] y):
-    cdef double total = 0
-    cdef Py_ssize_t i
-    for i in prange(x.shape[0], nogil=True):
-        total += x[i]*y[i]
-    total = sqrt(total)
-    return total
+# @cython.boundscheck(False)
+# @cython.wraparound(False)
+# cdef double dist_parallel(double[::1] x, double[::1] y):
+#     cdef double total = 0
+#     cdef Py_ssize_t i
+#     for i in prange(x.shape[0], nogil=True):
+#         total += x[i]*y[i]
+#     total = sqrt(total)
+#     return total
 
 @cython.boundscheck(False)
 @cython.wraparound(False) 
@@ -38,6 +38,16 @@ def update_dists(double[::1] dists,double[:,::1] elements, double[::1] item):
     cdef Py_ssize_t i
     cdef double tmp
     for i in prange(num, nogil=True):
+        tmp = l2_dist(elements[i],item)
+        dists[i] = min(dists[i],tmp)
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def update_dists_sequential(double[::1] dists,double[:,::1] elements, double[::1] item):
+    cdef Py_ssize_t num = elements.shape[0]
+    cdef Py_ssize_t i
+    cdef double tmp
+    for i in range(num):
         tmp = l2_dist(elements[i],item)
         dists[i] = min(dists[i],tmp)
 

@@ -22,7 +22,8 @@ def gonzales_algorithm(
         lower_constraint: int = 1,
         initial_sol_distances: Optional[np.ndarray] = None,
         initial_sol_diversity: Optional[float] = None,
-        _tqdm: bool = False
+        _tqdm: bool = False,
+        parallel: bool = True
 ) -> Tuple[set, float, np.ndarray, bool]:
     """Greedy algorithm for k-centers clustering.
 
@@ -58,7 +59,10 @@ def gonzales_algorithm(
         # update diversity for each solution
         for solution_idx in solution_idxs:
             sol_div = min(sol_div, element_distances[solution_idx])
-            parallel_utils.update_dists(element_distances, features, features[solution_idx])
+            if parallel:
+                parallel_utils.update_dists(element_distances, features, features[solution_idx])
+            else:
+                parallel_utils.update_dists_sequential(element_distances, features, features[solution_idx])
     elif initial_sol_distances is not None and initial_sol_diversity is not None:
         element_distances = initial_sol_distances
         sol_div = initial_sol_diversity
@@ -79,7 +83,10 @@ def gonzales_algorithm(
         logger.debug(f"\t\tAdded item {ids[max_idx]}")
         solution_idxs.add(max_idx)
         # update the closest distance to current candidate set
-        parallel_utils.update_dists(element_distances, features, max_item)
+        if parallel:
+            parallel_utils.update_dists(element_distances, features, max_item)
+        else:
+            parallel_utils.update_dists_sequential(element_distances, features, max_item)
         if _tqdm:
             pbar.update()
     if _tqdm:
@@ -101,7 +108,8 @@ def group_gonzales_algorithm(
         eps: float,
         constraints: Dict[int,Tuple[int, int]],
         diversity_threshold: float = 0,
-        working_data: Optional[Dict[int, Tuple[np.ndarray, float]]] = None
+        working_data: Optional[Dict[int, Tuple[np.ndarray, float]]] = None,
+        parallel: bool = True
 ) -> Tuple[set, float, dict]:
     """A version of greedy k-centres algorithm when data has groups.
 
@@ -170,7 +178,7 @@ def group_gonzales_algorithm(
                 _initial_solution_diversity = working_data[group][1]
             # Runs the Gonzales algorithm for the group
             _group_solution, _group_solution_diversity, _group_solution_distances, success = gonzales_algorithm(
-                _initial_solution, _features, _ids, k, diversity_threshold, lower_constraint, _initial_solution_distances, _initial_solution_diversity, _tqdm=False)
+                _initial_solution, _features, _ids, k, diversity_threshold, lower_constraint, _initial_solution_distances, _initial_solution_diversity, _tqdm=False, parallel=parallel)
             # update working data
             working_data[group] = (
                 _group_solution_distances, _group_solution_diversity)
@@ -391,7 +399,8 @@ def fmmd(
     constraints: Dict[int,Tuple[int, int]],
     eps: float,
     time_limit:int = 300,
-    verbose:bool = False
+    verbose:bool = False,
+    parallel: bool = True
 ) -> Tuple[set, float]:
     """The implementation of the Fair Max-Min Diversification algorithm.
     First obtains a greedy solution ignoring fairness constrains. Then obtains a coreset by 
@@ -412,7 +421,7 @@ def fmmd(
     alg_start = time()
     initial_solution = set()
     initial_solution, diversity, _, _ = gonzales_algorithm(
-        initial_solution, features, ids, k)
+        initial_solution, features, ids, k,parallel=parallel)
     init_sol_time = time() - alg_start
     logger.info(f"{init_sol_time=}")
     _initial_solution = initial_solution.copy()
@@ -422,7 +431,7 @@ def fmmd(
     while True:
         start = time()
         _initial_solution, diversity_threshold, working_data = group_gonzales_algorithm(
-            _initial_solution, features, ids, groups, k, eps, constraints, diversity_threshold, working_data)
+            _initial_solution, features, ids, groups, k, eps, constraints, diversity_threshold, working_data,parallel=parallel)
         coreset_time = time()-start
         logger.info(f"{coreset_time=}")
         G = get_coreset_graph(_initial_solution, diversity_threshold,
