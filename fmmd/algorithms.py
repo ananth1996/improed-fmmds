@@ -206,7 +206,8 @@ def get_coreset_graph(
     ids: np.ndarray,
     groups: np.ndarray,
     constraints: Dict[int,Tuple[int, int]],
-    G:Optional[nx.Graph]=None
+    G:Optional[nx.Graph]=None,
+    parallel_edge_creation: bool = False
 ) -> nx.Graph:
     """Creates a coreset graph given a greedy solution for data with groups
 
@@ -226,12 +227,17 @@ def get_coreset_graph(
         # ensure that order of features is same as that in solutions
         sorter = np.argsort(ids)
         solution_idxs = sorter[np.searchsorted(ids, _solution, sorter=sorter)]
-        start = time()
         # find edges between solution items where 
         # distance is below the threshold
-        us,vs,dists = parallel_utils.edges(features[solution_idxs],diversity)
-        parallel_edges_time = time() - start
-        logger.info(f"{parallel_edges_time=}")
+        start = time()
+        if parallel_edge_creation:
+            us,vs,dists = parallel_utils.edges(features[solution_idxs],diversity)
+            parallel_edges_time = time() - start
+            logger.info(f"{parallel_edges_time=}")
+        else:
+            us,vs,dists = parallel_utils.edges_sequential(features[solution_idxs],diversity)
+            sequential_edges_time = time() - start
+            logger.info(f"{sequential_edges_time=}")
         
         start = time()
         G = nx.Graph()
@@ -402,7 +408,8 @@ def fmmd(
     eps: float,
     time_limit:int = 300,
     verbose:bool = False,
-    parallel_dist_update: bool = False
+    parallel_dist_update: bool = False,
+    parallel_edge_creation: bool = False
 ) -> Tuple[set, float]:
     """The implementation of the Fair Max-Min Diversification algorithm.
     First obtains a greedy solution ignoring fairness constrains. Then obtains a coreset by 
@@ -417,6 +424,7 @@ def fmmd(
         constraints (List[Tuple[int,int]]): The list of lower and upper limits on number of samples for each group 
         eps (float): The fraction to relax the diversity to get a solution.
         parallel_dist_update (bool, optional): Whether to update distances in parallel. Defaults to False.
+        parallel_edge_creation (bool, optional): Whether to create coreset graph edges in parallel. Defaults to False.
     Returns:
         Tuple[set,float]: _description_
     """
@@ -437,7 +445,7 @@ def fmmd(
         coreset_time = time()-start
         logger.info(f"{coreset_time=}")
         G = get_coreset_graph(_initial_solution, diversity_threshold,
-                              features, ids, groups, constraints,G=G)
+                              features, ids, groups, constraints,G=G,parallel_edge_creation=parallel_edge_creation)
         start = time()
         final_solution = get_ILP_solution(G, k,time_limit=time_limit,verbose=verbose)
         ilp_time = time() - start

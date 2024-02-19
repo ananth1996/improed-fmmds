@@ -64,7 +64,12 @@ def get_parser():
     parser.add_argument(
         "--parallel-dist-update",
         action="store_true",
-        help="Whether to update distances in parallel for Gonzales algorithm",
+        help="Update distances in parallel for Gonzales algorithm",
+    )
+    parser.add_argument(
+        "--parallel-edge-creation",
+        action="store_true",
+        help="Create coreset graph edges in parallel",
     )
     return parser
 
@@ -97,6 +102,7 @@ if __name__ == "__main__":
             constraints,
             args.eps,
             parallel_dist_update=args.parallel_dist_update,
+            parallel_edge_creation=args.parallel_edge_creation,
         )
 
     print(f"{diversity=}")

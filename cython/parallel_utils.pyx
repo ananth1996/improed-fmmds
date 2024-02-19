@@ -126,3 +126,29 @@ def edges(double[:,::1] features,double diversity_threshold):
         for _dist in dists[tid]:
             dist.push_back(_dist)
     return u,v,dist
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def edges_sequential(double[:,::1] features,double diversity_threshold):
+    """
+    Returns the edges between items which have distance below a threshold.
+    """
+    cdef Py_ssize_t N = features.shape[0]
+    cdef Py_ssize_t M = N*(N-1)//2
+    cdef Py_ssize_t i,j,idx
+    cdef vector[Py_ssize_t] u,v
+    cdef vector[double] dist
+    cdef double tmp = 0.0
+    for idx in range(M):
+        # https://stackoverflow.com/questions/27086195/linear-index-upper-triangular-matrix
+        i = N - 2 - <Py_ssize_t>(sqrt(-8*idx + 4*N*(N-1)-7)/2.0 - 0.5)
+        j = idx + i + 1 - M + (N-i)*((N-i)-1)//2
+        tmp = l2_dist(features[i],features[j])
+        # idx = N * i + j - ((i + 2) * (i + 1))//2
+        if tmp < diversity_threshold:
+            u.push_back(i)
+            v.push_back(j)
+            dist.push_back(tmp)
+    
+    return u,v,dist
