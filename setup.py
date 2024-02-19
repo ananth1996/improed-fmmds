@@ -9,7 +9,7 @@ if platform == "darwin":
 
 parallel_utils = Extension("fmmd.parallel_utils", 
                     sources = ["cython/parallel_utils.pyx"],
-                    extra_compile_args=['-fopenmp',"-std=c++11"],
+                    extra_compile_args=['-fopenmp',"-std=c++11","-O3"],
                     extra_link_args=['-fopenmp',"-std=c++11"],
                     # include_dirs=[inc_path],
                     )
