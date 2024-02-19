@@ -23,7 +23,7 @@ def gonzales_algorithm(
         initial_sol_distances: Optional[np.ndarray] = None,
         initial_sol_diversity: Optional[float] = None,
         _tqdm: bool = False,
-        parallel: bool = True
+        parallel_dist_update: bool = False
 ) -> Tuple[set, float, np.ndarray, bool]:
     """Greedy algorithm for k-centers clustering.
 
@@ -37,6 +37,7 @@ def gonzales_algorithm(
         initial_sol_distances (Optional[np.ndarray],optional): The smallest distance between each items and all solution items. Defaults to None.
         initial_sol_diversity (Optional[float],optional): The diversity of the initial solution set
         _tqdm (bool, optional): Whether to display a tqdm loading bar. Defaults to False.
+        parallel_dist_update (bool, optional): Whether to update distances in parallel. Defaults to False.
 
     Returns:
         Tuple[set,float,np.ndarray,bool]: A solution set of item ids, its diversity,. 
@@ -59,7 +60,7 @@ def gonzales_algorithm(
         # update diversity for each solution
         for solution_idx in solution_idxs:
             sol_div = min(sol_div, element_distances[solution_idx])
-            if parallel:
+            if parallel_dist_update:
                 parallel_utils.update_dists(element_distances, features, features[solution_idx])
             else:
                 parallel_utils.update_dists_sequential(element_distances, features, features[solution_idx])
@@ -83,7 +84,7 @@ def gonzales_algorithm(
         logger.debug(f"\t\tAdded item {ids[max_idx]}")
         solution_idxs.add(max_idx)
         # update the closest distance to current candidate set
-        if parallel:
+        if parallel_dist_update:
             parallel_utils.update_dists(element_distances, features, max_item)
         else:
             parallel_utils.update_dists_sequential(element_distances, features, max_item)
@@ -109,7 +110,7 @@ def group_gonzales_algorithm(
         constraints: Dict[int,Tuple[int, int]],
         diversity_threshold: float = 0,
         working_data: Optional[Dict[int, Tuple[np.ndarray, float]]] = None,
-        parallel: bool = True
+        parallel_dist_update: bool = False
 ) -> Tuple[set, float, dict]:
     """A version of greedy k-centres algorithm when data has groups.
 
@@ -123,6 +124,7 @@ def group_gonzales_algorithm(
         constraints (Dict[int,Tuple[int, int]]): The set of lower and upper limits of samples for each group.
         diversity_threshold (float, optional): The threshold for each group. Defaults to 0.
         working_data (Optional[Dict[int,Tuple[np.ndarray,float]]],optional]: The distances and diversity for each group. If available skips certain computations. Defaults to None.
+        parallel_dist_update (bool, optional): Whether to update distances in parallel. Defaults to False.
     Returns:
         Tuple[set, float, dict]: The solution set of item ids, the final diversity threshold and the working data.
     """
@@ -178,7 +180,7 @@ def group_gonzales_algorithm(
                 _initial_solution_diversity = working_data[group][1]
             # Runs the Gonzales algorithm for the group
             _group_solution, _group_solution_diversity, _group_solution_distances, success = gonzales_algorithm(
-                _initial_solution, _features, _ids, k, diversity_threshold, lower_constraint, _initial_solution_distances, _initial_solution_diversity, _tqdm=False, parallel=parallel)
+                _initial_solution, _features, _ids, k, diversity_threshold, lower_constraint, _initial_solution_distances, _initial_solution_diversity, _tqdm=False, parallel_dist_update=parallel_dist_update)
             # update working data
             working_data[group] = (
                 _group_solution_distances, _group_solution_diversity)
@@ -400,7 +402,7 @@ def fmmd(
     eps: float,
     time_limit:int = 300,
     verbose:bool = False,
-    parallel: bool = True
+    parallel_dist_update: bool = False
 ) -> Tuple[set, float]:
     """The implementation of the Fair Max-Min Diversification algorithm.
     First obtains a greedy solution ignoring fairness constrains. Then obtains a coreset by 
@@ -414,14 +416,14 @@ def fmmd(
         num_groups (int): The number of unique groups in the data
         constraints (List[Tuple[int,int]]): The list of lower and upper limits on number of samples for each group 
         eps (float): The fraction to relax the diversity to get a solution.
-
+        parallel_dist_update (bool, optional): Whether to update distances in parallel. Defaults to False.
     Returns:
         Tuple[set,float]: _description_
     """
     alg_start = time()
     initial_solution = set()
     initial_solution, diversity, _, _ = gonzales_algorithm(
-        initial_solution, features, ids, k,parallel=parallel)
+        initial_solution, features, ids, k,parallel_dist_update=parallel_dist_update)
     init_sol_time = time() - alg_start
     logger.info(f"{init_sol_time=}")
     _initial_solution = initial_solution.copy()
@@ -431,7 +433,7 @@ def fmmd(
     while True:
         start = time()
         _initial_solution, diversity_threshold, working_data = group_gonzales_algorithm(
-            _initial_solution, features, ids, groups, k, eps, constraints, diversity_threshold, working_data,parallel=parallel)
+            _initial_solution, features, ids, groups, k, eps, constraints, diversity_threshold, working_data,parallel_dist_update=parallel_dist_update)
         coreset_time = time()-start
         logger.info(f"{coreset_time=}")
         G = get_coreset_graph(_initial_solution, diversity_threshold,
