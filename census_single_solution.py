@@ -28,9 +28,9 @@ def get_parser():
     parser.add_argument("--old",action="store_true",help="To use old version of FMMD-S algorithm")
     parser.add_argument("--eps",type=float,default=0.05,help="The factor to relax threshold by")
     parser.add_argument("--log-level",choices=[logging.WARNING,logging.INFO,logging.DEBUG],type=int,default=logging.INFO,help="The logging level")
+    parser.add_argument("--sequential",action="store_true",help="To use parallel updating of distances")
     return parser
-
-
+#%%
 if __name__ == "__main__":
     args = get_parser().parse_args()
     logging.basicConfig(level=args.log_level)
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     if args.old:
         solution,diversity,_ = scalable_fmmd_ILP(elements,args.eps,args.k,args.C,constraints,utils.euclidean_dist)
     else:
-        solution,diversity = fmmd(features,ids,groups,args.k,constraints,args.eps)
+        solution,diversity = fmmd(features,ids,groups,args.k,constraints,args.eps,parallel=not args.sequential)
 
     print(f"{diversity=}")
 # %%

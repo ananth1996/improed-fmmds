@@ -36,6 +36,8 @@ def get_parser():
                         default=DATA_DIR)
     parser.add_argument("--pca", action="store_true",
                         help="Whether to use PCA embeddigs")
+    parser.add_argument("--sequential", action="store_true",
+                        help="Whether to use parallel update of distances")
     parser.add_argument("--time-limit", type=int,
                         help="Time limit for ILP", default=300)
     parser.add_argument(
@@ -84,7 +86,7 @@ if __name__ == "__main__":
         write_solution_file(output_file,greedy_solution, greedy_diversity)
     elif args.algorithm == "fmmd":
         solution, diversity = fmmd(
-            features, ids, groups, k, constraints, args.eps, args.time_limit)
+            features, ids, groups, k, constraints, args.eps, args.time_limit,parallel=not args.sequential)
         if args.pca:
             output_file = args.output_dir/f"diverse_balanced_samples_pca_{k}.txt"
         else:
