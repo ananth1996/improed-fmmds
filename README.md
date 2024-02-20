@@ -113,21 +113,30 @@ Experiments on an Apple MacBook Pro with a M2 Pro chip (12 cores)
 
 ### Multicore Performance 
 
-Command profiled:
-```
-python ecco_balanced_samples.py -k=500 --pca --eps=0.5
+The parallel options are only useful when the number of dimensions increase.
+Therefore, we use the full `768` dimensional embeddings for the ECCO dataset and select `k=500` balanced samples as follows:
+```bash
+python ecco_balanced_samples.py -k=500  --eps=0.5
 ```
 
-Experiments on a machine with 32 cores and 20GB RAM
 
-| Cores | Mean [s] | Min [s] | Max [s] | Relative |
-|:---|---:|---:|---:|---:|
-| 1 | 468.174 ± 1.280 | 466.917 | 469.476 | 1.59 ± 0.00 |
-| 2 | 506.413 ± 14.346 | 490.019 | 516.669 | 1.73 ± 0.05 |
-| 4 | 492.485 ± 5.938 | 487.165 | 498.891 | 1.68 ± 0.02 |
-| 8 | 370.924 ± 10.837 | 358.570 | 378.823 | 1.26 ± 0.04 |
-| 16 | 293.559 ± 0.296 | 293.319 | 293.890 | 1.00 |
-| 32 | 304.593 ± 0.948 | 303.976 | 305.685 | 1.04 ± 0.00 |
+The `fmmd` method found in [fmmd/algorithms.py](./fmmd/algorithms.py) has two options to utilize multiple cores:
+1. `--parallel-dist-update`: Update the solution distances in parallel for the Gonzales algorithm
+2. `--parallel-edge-creation`: Find the coreset edges in parallel which are below the diversity threshold
+
+Both these options speed up the algorithm in different ways. For the ECCO dataset and balanced sampling we observe the following trends:
+
+
+| `--parallel-dist-update`| `--parallel-edge-creation` | Running Time | Relative |
+|:---:|:---:|---:|---:|
+| ❌|❌ | 4444.224 | 4.55 |
+| ✅| ❌| 1781.913 | 1.82 |
+|❌ |✅ | 3625.860 | 3.71 |
+| ✅| ✅ | 976.961 | 1.00 |
+
+The above ablation results indicate the majority of the speedup is gained from the parallel edge creation due to the large number of items in the coreset.
+
+All experiments were conducted on a Linux machine with 32 cores and 30GB RAM.
 
 ### Balanced Sampling Performance
 
