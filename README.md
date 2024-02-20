@@ -14,10 +14,9 @@ An improved implementation of the FMMD-S algorithm from the paper:
     - [Cython](#cython)
   - [Balanced Sampling](#balanced-sampling)
     - [Old FMMD-S implementation Bottlenecks](#old-fmmd-s-implementation-bottlenecks)
-  - [Benchmarks](#benchmarks)
-    - [Relative Speedups](#relative-speedups)
-    - [When to parallelize?](#when-to-parallelize)
-    - [Balanced Sampling Performance](#balanced-sampling-performance)
+  - [Speedup over original Implementation](#speedup-over-original-implementation)
+  - [When to parallelize?](#when-to-parallelize)
+  - [Full Experiment Results](#full-experiment-results)
   - [Limitations and Future Updates](#limitations-and-future-updates)
 
 
@@ -31,7 +30,40 @@ The FMMD-S algorithm described in the paper has the following four steps:
 4. Create the MIS problem using the coreset graph and solve using ILP solver
 5. If solution is infeasible decrease diversity threshold and go to step 2, else return solution
 
+The FMMD-S algorithm is available in [fmmd.algorithms](./fmmd/algorithms.py) is the `fmmd` function
 
+```python
+fmmd(
+    features: np.ndarray,
+    ids: np.ndarray,
+    groups: np.ndarray,
+    k: int,
+    constraints: Dict[int,Tuple[int, int]],
+    eps: float,
+    time_limit:int = 300,
+    verbose:bool = False,
+    parallel_dist_update: bool = False,
+    parallel_edge_creation: bool = False
+) -> Tuple[set, float]:
+    """The implementation of the Fair Max-Min Diversification algorithm.
+    First obtains a greedy solution ignoring fairness constrains. Then obtains a coreset by 
+    getting greedy solutions in each group. Solves the MIS problem on the coreset.
+
+    Args:
+        features (np.ndarray): The feature vectors of the items 
+        ids (np.ndarray): The ids of the items  
+        groups (np.ndarray): The group (int) of the items
+        k (int): The minimum number of total samples required
+        constraints (List[Tuple[int,int]]): The list of lower and upper limits on number of samples for each group 
+        eps (float): The fraction to relax the diversity to get a solution.
+        time_limit (int): The maximum number of seconds for Gurobi solver
+        verbose (bool, optional): Print many debug statements. Defaults to False.
+        parallel_dist_update (bool, optional): Whether to update distances in parallel. Defaults to False.
+        parallel_edge_creation (bool, optional): Whether to create coreset graph edges in parallel. Defaults to False.
+    Returns:
+        Tuple[set,float]: Returns the solution as set of item ids and the solution diversity
+    """
+```
 ## Setup 
 
 ### Python 
@@ -47,7 +79,7 @@ The FMMD-S algorithm uses [Gurobi](https://www.gurobi.com) to solve the MIS prob
 The gurobi optimizer can be used without a license for small datasets, but for larger datasets it is recommended to have an [academic licence](https://www.gurobi.com/academia/academic-program-and-licenses/).
 
 ### Cython
-This library uses Cython to parallelize several utility functions. 
+This library uses Cython to compile and parallelize several utility functions. 
 
 Run the following command to build the module:
 ```bash
@@ -68,7 +100,7 @@ The `.pyx` is found in [ctython/parallel_utils.pyx](./cython/parallel_utils.pyx)
 
 ## Balanced Sampling
 
-This library was developed specifically to balanced sampling.
+This library was developed specifically to perform balanced sampling.
 
 Balanced sampling is when there is a need to uniformly sample from groups instead of the typical proportional 
 sampling. Specifically, we wanted to perform balanced sampling when the distribution of groups was very skewed. This means that there are some groups with very few items and some groups with a lot of items. Furthermore, if `min_group_size` is the size of the smallest group and `k>min_group_size` then we might be forced to take all items from smaller groups. 
@@ -95,10 +127,10 @@ This sort of balanced sampling constraints causes several bottlenecks in the ori
 We fix these issues in the new implementations. Along with these fixes, a parallelization of several portions of the algorithm offer a general speedup compared the original implementation.
 
 
-## Benchmarks
-
+## Speedup over original Implementation
 
 Running the benchmark on the Census dataset from the original paper.
+For the full census dataset. `k` is the number of samples and `C` is the number of groups. 
 
 New and improved algorithm implementation
 ```bash
@@ -111,23 +143,18 @@ Original algorithm implementation
 python census_single_solution.py -k=10 -C=2 --old
 ```
 
-### Relative Speedups 
-
-For the full census dataset. `k` is the number of samples and `C` is the number of groups. 
-
-Experiments on an Apple MacBook Pro with a M2 Pro chip (12 cores)
-
 | k| C | Original (in seconds) | New (in seconds) | Relative Speedup |
 |:---|---:|---:|---:|---:|
-10 | 2 | 112.67 | 10.49 |  10.73x |
-10 | 7 | 106.24 | 10.71 | 9.91x |
-50 | 14 | 474.152 | 19.06  | 24.88x |
-100 | 14 | 3670.781 | 39.722  | 92.41x |
+10 | 2 | 112.67 | 8.316 |  13.55x |
+10 | 7 | 106.24 | 8.256| 12.87x |
+50 | 14 | 474.152 | 10.503  | 45.14x |
+100 | 14 | 3670.781 | 18.092  | 202.90x |
 
+Experiments on an Apple MacBook Pro with a M2 Pro chip and 16GB RAM.
 
-### When to parallelize?
+## When to parallelize?
 
-The `gonzales_algorithm` method found in [fmmd/algorithms.py](./fmmd/algorithms.py) has the argument `parallel_dist_update`. This method is used in both step 1 and step 2 of the algorithm as described in [Algorithm Overview](#algorithm-overview).
+The `gonzales_algorithm` method found in [fmmd/algorithms.py](./fmmd/algorithms.py) has the argument `parallel_dist_update`. This argument will parallelize the update to the distance array. The `gonzales_algoritm` is used in both step 1 and step 2 (see [Algorithm Overview](#algorithm-overview)) and can offer substantial speedups.
 
 Therefore, to test the speed-up of one execution of the Gonzales algorithm, we executed the following for different number of items and feature dimensions:
 
@@ -140,9 +167,11 @@ gonzales_algorithm(set(),features,ids,k=10,parallel_dist_update=False) # with pa
 ```
 
 The result for speed up is shown in the figure below:
-![dist_speedup](./parallel_dist_update_speedup.png)
+<p align="center">
+<img src="./parallel_dist_update_speedup.png" alt="edges_speedup" width="500"/>
+</p>
 
-All blue regions are where the parallel version is slower than the sequential version and all the red regions are where the parallel regions are faster than the sequential versions. 
+All blue regions are where the parallel version is slower than the sequential version and all the red regions are where the parallel regions are faster than the sequential versions.
 
 
 
@@ -158,10 +187,12 @@ parallel_utils.edges_sequential(features,0.01) # sequential edge creation
 ```
 
 The results are shown below:
-![edges_speedup](./parallel_edges_speedup.png)
+<p align="center">
+<img src="./parallel_edges_speedup.png" alt="edges_speedup" width="500"/>
+</p>
+All blue regions are where the parallel version is slower than the sequential version and all the red regions are where the parallel regions are faster than the sequential versions.
 
-
-> The number of coreset items depends on the data features, the number of samples `k` and the constraints for the FMMD problem
+> The number of coreset items depends on the data features, the number of samples `k` and the constraints for the FMMD problem.
 
 As discussed above, the parallel options are only useful when the number of dimensions increase.
 Therefore, using the full `768` dimensional embeddings for the ECCO dataset, we select `k=500` balanced samples as follows:
@@ -183,11 +214,9 @@ For the ECCO dataset and balanced sampling we observe the following trends:
 |❌ |✅ | 3625.860 | 3.71 |
 | ✅| ✅ | 976.961 | 1.00 |
 
-The above ablation results indicate the majority of the speedup is gained from the parallel edge creation due to the large number of items in the coreset. The speedup offered by the parallel updates is not insignificant and using both leads to an overall faster algorithm.
+The above ablation results indicate the majority of the speedup is gained from the parallel updates and that the speedup from parallel edge creation is relatively smaller potentially due to the number of coreset items.
 
-### Balanced Sampling Performance
-
-The benefit of many cores comes when there is balanced sampling performed.
+## Full Experiment Results
 
 For the ECCO dataset, there are 4.2 million items and 137 groups with a very skewed distribution. The requirement was at least 3000 balanced samples. With the group distribution resulted in the following:
 1. Maximum of `26`  samples from each group

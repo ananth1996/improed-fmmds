@@ -420,13 +420,14 @@ def fmmd(
         ids (np.ndarray): The ids of the items  
         groups (np.ndarray): The group (int) of the items
         k (int): The minimum number of total samples required
-        num_groups (int): The number of unique groups in the data
         constraints (List[Tuple[int,int]]): The list of lower and upper limits on number of samples for each group 
         eps (float): The fraction to relax the diversity to get a solution.
+        time_limit (int): The maximum number of seconds for Gurobi solver
+        verbose (bool, optional): Print many debug statements. Defaults to False.
         parallel_dist_update (bool, optional): Whether to update distances in parallel. Defaults to False.
         parallel_edge_creation (bool, optional): Whether to create coreset graph edges in parallel. Defaults to False.
     Returns:
-        Tuple[set,float]: _description_
+        Tuple[set,float]: Returns the solution as set of item ids and the solution diversity
     """
     alg_start = time()
     initial_solution = set()
