@@ -108,7 +108,7 @@ def plot_speedup(df):
     y_items = df.d.unique()
     idx = np.lexsort((y_data, x_data)).reshape(len(x_items), len(y_items))
     # cs = plt.contourf(x_data[idx], y_data[idx], z_data[idx],locator=ticker.LogLocator(subs='all'))
-    cmap = cm.coolwarm
+    cmap = cm.bwr
     norm=colors.TwoSlopeNorm(vcenter=1)
     # norm=colors.LogNorm()
     cs = plt.contourf(x_data[idx], y_data[idx], z_data[idx],norm=norm,cmap=cmap)

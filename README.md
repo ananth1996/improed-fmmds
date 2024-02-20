@@ -7,6 +7,7 @@ An improved implementation of the FMMD-S algorithm from the paper:
 
 - [Improved FMMD-S](#improved-fmmd-s)
   - [Table of Contents](#table-of-contents)
+  - [Algorithm Overview](#algorithm-overview)
   - [Setup](#setup)
     - [Python](#python)
     - [Gurobi](#gurobi)
@@ -15,9 +16,21 @@ An improved implementation of the FMMD-S algorithm from the paper:
     - [Old FMMD-S implementation Bottlenecks](#old-fmmd-s-implementation-bottlenecks)
   - [Benchmarks](#benchmarks)
     - [Relative Speedups](#relative-speedups)
-    - [Multicore Performance](#multicore-performance)
+    - [When to parallelize?](#when-to-parallelize)
     - [Balanced Sampling Performance](#balanced-sampling-performance)
   - [Limitations and Future Updates](#limitations-and-future-updates)
+
+
+## Algorithm Overview
+
+The FMMD-S algorithm described in the paper has the following four steps:
+
+1. Obtain a greedy solution with `k` items using the Gonzales algorithm without regard for group constraints
+2. For each group run the Gonzales algorithm to obtain a coreset and a diversity threshold
+3. Creates a coreset graph where edges signify the distance between items are lower than the diversity threshold
+4. Create the MIS problem using the coreset graph and solve using ILP solver
+5. If solution is infeasible decrease diversity threshold and go to step 2, else return solution
+
 
 ## Setup 
 
@@ -111,20 +124,56 @@ Experiments on an Apple MacBook Pro with a M2 Pro chip (12 cores)
 50 | 14 | 474.152 | 19.06  | 24.88x |
 100 | 14 | 3670.781 | 39.722  | 92.41x |
 
-### Multicore Performance 
 
-The parallel options are only useful when the number of dimensions increase.
-Therefore, we use the full `768` dimensional embeddings for the ECCO dataset and select `k=500` balanced samples as follows:
+### When to parallelize?
+
+The `gonzales_algorithm` method found in [fmmd/algorithms.py](./fmmd/algorithms.py) has the argument `parallel_dist_update`. This method is used in both step 1 and step 2 of the algorithm as described in [Algorithm Overview](#algorithm-overview).
+
+Therefore, to test the speed-up of one execution of the Gonzales algorithm, we executed the following for different number of items and feature dimensions:
+
+```python
+rng = np.random.default_rng(seed=42)
+features = rng.random(size=(n,d))
+ids = np.arange(n)
+gonzales_algorithm(set(),features,ids,k=10,parallel_dist_update=True) # with parallel 
+gonzales_algorithm(set(),features,ids,k=10,parallel_dist_update=False) # with parallel 
+```
+
+The result for speed up is shown in the figure below:
+![dist_speedup](./parallel_dist_update_speedup.png)
+
+All blue regions are where the parallel version is slower than the sequential version and all the red regions are where the parallel regions are faster than the sequential versions. 
+
+
+
+Similarly, the `get_coreset_graph` method in in [fmmd/algorithms.py](./fmmd/algorithms.py) has an argument `parallel_edges_creation`. This option uses the `fmmd.parallel_utils.edges` method to parallelize step 3 of the algorithm as described in [Algorithm Overview](#algorithm-overview). Again, the speed-up depends on the number of items in the coreset and the dimensionality of each item. 
+
+Therefore, to test the speed-up offered by the parallel version, we run the following two methods with random data of different coreset size and dimensions:
+
+```python
+rng = np.random.default_rng(seed=42)
+features = rng.random(size=(n,d))
+parallel_utils.edges(features,0.01) # parallel edge creation
+parallel_utils.edges_sequential(features,0.01) # sequential edge creation
+```
+
+The results are shown below:
+![edges_speedup](./parallel_edges_speedup.png)
+
+
+> The number of coreset items depends on the data features, the number of samples `k` and the constraints for the FMMD problem
+
+As discussed above, the parallel options are only useful when the number of dimensions increase.
+Therefore, using the full `768` dimensional embeddings for the ECCO dataset, we select `k=500` balanced samples as follows:
 ```bash
 python ecco_balanced_samples.py -k=500  --eps=0.5
 ```
-
 
 The `fmmd` method found in [fmmd/algorithms.py](./fmmd/algorithms.py) has two options to utilize multiple cores:
 1. `--parallel-dist-update`: Update the solution distances in parallel for the Gonzales algorithm
 2. `--parallel-edge-creation`: Find the coreset edges in parallel which are below the diversity threshold
 
-Both these options speed up the algorithm in different ways. For the ECCO dataset and balanced sampling we observe the following trends:
+For the ECCO dataset and balanced sampling we observe the following trends:
 
 
 | `--parallel-dist-update`| `--parallel-edge-creation` | Running Time | Relative |
@@ -134,9 +183,7 @@ Both these options speed up the algorithm in different ways. For the ECCO datase
 |❌ |✅ | 3625.860 | 3.71 |
 | ✅| ✅ | 976.961 | 1.00 |
 
-The above ablation results indicate the majority of the speedup is gained from the parallel edge creation due to the large number of items in the coreset.
-
-All experiments were conducted on a Linux machine with 32 cores and 30GB RAM.
+The above ablation results indicate the majority of the speedup is gained from the parallel edge creation due to the large number of items in the coreset. The speedup offered by the parallel updates is not insignificant and using both leads to an overall faster algorithm.
 
 ### Balanced Sampling Performance
 
