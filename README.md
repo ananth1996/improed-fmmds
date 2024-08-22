@@ -207,7 +207,7 @@ The `fmmd` method found in [fmmd/algorithms.py](./fmmd/algorithms.py) has two op
 For the ECCO dataset and balanced sampling we observe the following trends:
 
 
-| `--parallel-dist-update`| `--parallel-edge-creation` | Running Time | Relative |
+| `--parallel-dist-update`| `--parallel-edge-creation` | Running Time | Relative Speedup |
 |:---:|:---:|---:|---:|
 | ❌|❌ | 4444.224 | 4.55 |
 | ✅| ❌| 1781.913 | 1.82 |
